@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>使用substring 来实现简单的逐字出现。</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    #showStr {
+      width:100%;
+      height:100%;
+      background :black;
+      color :#2aff00;
+    }
+  </style>
+<body>
+使用substring 来实现简单的逐字出现。关键在于substring.本程序也包含：innerText;innerHTML;document.write;
+<div id="showStr"></div>
+<div style="display:none" id="string">确定一下字符的正确<hr>换行与字母的字符。MDLASJK
+</div>
+<div id="mine"></div>  
+
+<script language="javascript">
+var index=0;
+var str=document.getElementById("string").innerHTML;
+function type(){
+if(index==str.length){index=0;}
+    document.getElementById("showStr").innerHTML = str.substring(0,index++);//注意这里使用innerHTML和innerText的区别
+}
+setInterval(type, 100);
+document.write("<ol><li></li><li></li><li></li><li></li><li></li></ol>")
+document.getElementById("mine").innerHTML="<ol><li></li><li></li><li></li><li></li><li></li></ol>";
+</script>
+
+
+</body>
+</html>

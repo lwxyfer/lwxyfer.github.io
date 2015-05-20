@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+ <html> 
+ <style> 
+ html,body{ margin:0px; height:100%; } 
+ #bg{ width:100%; height:100%; margin: 0px auto; background-color:red; }
+ #bg2{ width:100%; height:100%; margin: 0px auto; background-color:green; }
+ #gun {
+    scrollamount:122;
+    z-index:9999;
+
+ }
+  </style>
+  <script>
+  
+  window.onload = function gun() {
+    var gund =document.getElementById("gun");
+    gund.setAttribute("scrollamount","4");
+}
+
+ var gunds =document.getElementById("guns");
+ gunds.addEventListener('click', function() {
+var gund =document.getElementById("gun");
+gund.setAttribute("scrollamount","32");}, false);   
+    }
+    
+  
+  </script>
+   <body bgcolor="red"> 
+   <div id="bg">
+   <button id="guns"></button>
+   <marquee behavior="alternate" direction="right" id="gun" scrollamount="122" onmouseover="this.stop()"onmouseout="this.start()">asafwffq<a href="javascript:void(0);" onclick="speed();return false;">sdgrgaggggggggggggg我爱中文，</a></marquee></div>
+   <div>
+   </div>
+  
+   <div id="bg2"></div>
+   <!-- <script>
+   window.open("http://www.baidu.com","pop","width=560,height=480")
+   </script> -->
+   <script src="global.js"></script>
+   <script src="global2.js"></script>
+    </body> 
+    </html>
