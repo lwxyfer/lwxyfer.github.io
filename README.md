@@ -1,6 +1,8 @@
 # lwxyfer.github.io
 github index
-
+#博客
+- ###www.lwxyfer.com  技术笔记与我的生活
+- ###lwxyfer.github.io  小应用
 #这里放一些好玩的前端小应用
 主要是各种小项目，好玩，哈哈。
 
