@@ -21,3 +21,4 @@ github index
 ###2015/5/26: 还是提醒自己要专注。
 ###2015/5/27: 有个名词叫做：厚积薄发
 ###2015/5/29: 时间的重要性，所以尽最大量不要浪费时间。我需要时间的，好多要学的。我有好多要学的东西啊。这个世界太美妙了，好多东西等我去探索啊。
+###2015/5/31: You know, sometimes all you need is 20 seconds of insance courage. Just literally 20 seconds of just embarrassing bravery. And I promise you you, something great will come of it
