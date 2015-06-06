@@ -21,6 +21,7 @@ github index
 ###2015/5/26: 还是提醒自己要专注。
 ###2015/5/27: 有个名词叫做：厚积薄发
 ###2015/5/29: 时间的重要性，所以尽最大量不要浪费时间。我需要时间的，好多要学的。我有好多要学的东西啊。这个世界太美妙了，好多东西等我去探索啊。
-###2015/5/31: You know, sometimes all you need is 20 seconds of insance courage. Just literally 20 seconds of just embarrassing bravery. And I promise you you, something great will come of it
+###2015/5/31: You know, sometimes all you need is 20 seconds of insance courage. Just literally 20 seconds of just embarrassing bravery. And I promise you, something great will come of it.
 ###2015/6/1: If you want to do something ,just do it. Never regret. 难道一切等年华逝去，才去做的话，一切都迟了。有些事现在不做，一辈子都不会做了。
 ###2015/6/4: 年轻人就该背井离乡出去闯一闯，去看看外面的世界。啊啊啊。
+###2015/6/5: 切记浮躁啊，我知道你想要学习，知道还有很多东西没学，但是要慢慢来，胖子不是一日养成的，要专注，专心。我的天，太多想要做的事了，太多没有做的事了。嗯，来个深呼吸。
