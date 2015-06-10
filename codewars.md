@@ -1,4 +1,5 @@
 ##CodeWars练习与笔记
+记录未做出的练习，并加以分析。
 <hr>
 
 1.Description:
