@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .a1 {
+    -webkit-transition:1s ease all;
+    -moz-transition:1s ease all;
+    padding:10px;
+    }
+    .a1:hover{
+    -webkit-transform:rotate(360deg) scale(1.2,1.2);
+    -moz-transform:rotate(360deg) scale(1.2,1.2);
+    background:#ff9900;
+    }
+    .a2 {
+        -webkit-transition:1s ease all;
+        -moz-transition: 1s ease all;
+        width:200px;
+        border:5px solid black;
+    }
+    .a2:hover {
+        width:300px;
+        border:5px solid blue;
+    }
+    .box {
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: #0000FF;
+    -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition:width 2s, height 2s, background-color 2s, transform 2s;
+}
+.box:hover {
+    background-color: #FFCCCC;
+    width:200px;
+    height:200px;
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+#foo {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background: #c00;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:  all 1s;
+}
+    </style>
+</head>
+<body>
+    <img src="img/f1.jpg" alt="" class="a1">
+    <img src="img/f1.jpg" alt="" class="a2">
+    <img src="img/f1.jpg" alt="" class="a3">
+    <img src="img/f1.jpg" alt="" class="a4">
+    <img src="img/f1.jpg" alt="" class="a5">
+    <p>盒子的多个属性一起动画: width, height, background-color, transform. 将光标悬停在盒子上查看动画。</p>
+    <div class="box">改变多个属性值，不只对transform进行过渡</div>
+    <div class="ball" id="foo"></div>
+
+    <script>
+    var f = document.getElementById('foo');
+document.addEventListener('click', function(ev){
+    f.style.left = (ev.clientX-25)+'px';
+    f.style.top = (ev.clientY-25)+'px';
+},false);</script>
+</body>
+</html>
+
+使用transform进行变形，然后使用transition设置过渡，过渡方式以及时间
+
+transition 只是过渡而已，可以给很多东西设置过渡。就如：背景颜色，或者大小。第二图片所示。不一定使用transform  ，transform 起的是一些变形作用，一般css没有的。如旋转等。
+
+transform也只是一些变形而已，要出现慢慢的变化，就得需要transiton。当然animation能做的更多。
+
+要设置出现在视口自动播放，就是不用：hover等来控制，简单的js能控制。或者animation实现。
+
+关注这几个属性的高级用法，还有规范，浏览器兼容等    以及对应的不同属性值的情况
