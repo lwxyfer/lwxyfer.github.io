@@ -51,7 +51,31 @@
   left: 0;
   transition:  all 1s;
 }
-    </style>
+.sao {
+    width:100px;
+    height:50px;
+    background: green;
+    animation:saomiao 4s;
+    -webkit-animation:saomiao 4s;
+    animation-timing-function: liner;
+    -webkit-timing-function: liner;
+    animation-iteration-count: 15;
+    -webkit-iteration-count:15;
+    animation-direction: alternate;
+}
+@keyframes saomiao{
+    from{ margin-left:10px;}
+    25% { height:100px;}
+    50% { width:300px;}
+    to{ margin-left:1000px;}
+}
+@-webkit-keyframes saomiao {
+    from{ margin-left:10px;}
+    to{ margin-left:1000px;}
+}
+</style>
+
+
 </head>
 <body>
     <img src="img/f1.jpg" alt="" class="a1">
@@ -62,6 +86,9 @@
     <p>盒子的多个属性一起动画: width, height, background-color, transform. 将光标悬停在盒子上查看动画。</p>
     <div class="box">改变多个属性值，不只对transform进行过渡</div>
     <div class="ball" id="foo"></div>
+    <div class="sao"></div>
+
+
 
     <script>
     var f = document.getElementById('foo');
