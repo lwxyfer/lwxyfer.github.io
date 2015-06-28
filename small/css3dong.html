@@ -73,6 +73,51 @@
     from{ margin-left:10px;}
     to{ margin-left:1000px;}
 }
+.a3 {
+    width:360px;
+    height:300px;
+    background:red;
+    animation:display 4s liner;
+    -webkit-animation: display 4s ease;
+    animation-iteration-count:5;
+}
+@keyframes display {
+    from{ -webkit-opacity:0.1;}
+    to{ -webkit-opacity:1.0;}
+}
+@-webkit-keyframes display {
+    from{ -webkit-opacity:0.1;}
+    to{ -webkit-opacity:1.0;}
+}
+.a4 {
+    animation:transform 4s;
+    animation-iteration-count:5;
+}
+@keyframes transform {
+    0% { transform:rotate(30deg);}
+    25% { transform:rotate(60deg);}
+    50% { transform: scale(1.2,1.2);}
+    100% { transform: translateX(100px);rotate(90deg);}
+}
+.a5 {
+    animation:rota 4s ease 1;
+}
+.a5:hover {
+    animation: rota 4s ease 1;
+}
+@keyframes rota {
+    0% { transform:rotate(0deg)}
+    100% { transform:rotate(360deg)}
+}
+.hopa {
+    width:200px;
+    height:200px;
+    background:#000;
+    transition:4s all;
+}
+.hopa:hover {
+    background:#fff;
+}
 </style>
 
 
@@ -87,6 +132,7 @@
     <div class="box">改变多个属性值，不只对transform进行过渡</div>
     <div class="ball" id="foo"></div>
     <div class="sao"></div>
+    <div class="hopa"></div>
 
 
 
@@ -108,3 +154,6 @@ transform也只是一些变形而已，要出现慢慢的变化，就得需要tr
 要设置出现在视口自动播放，就是不用：hover等来控制，简单的js能控制。或者animation实现。
 
 关注这几个属性的高级用法，还有规范，浏览器兼容等    以及对应的不同属性值的情况
+
+
+更多事件支持 ，比如使用hover控制 animation ，js来操控才行。对事件监听。
