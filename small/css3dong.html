@@ -118,6 +118,44 @@
 .hopa:hover {
     background:#fff;
 }
+.cir {
+    width:300px;
+    height:300px;
+    border-radius: 150px;
+    background: blue;
+    animation:cir 4s linear alternate 5;
+}
+@keyframes cir {
+    0%  { transform: translate(0,0) scale(0);}
+    25% { transform: translate(300px,50px) scale(0.2);}
+    50% { transform: translate(600px,0) scale(0.4);}
+    75% { transform: translate(900px,50px) scale(0.6);}
+    100% { transform: translate(1200px,0px) scale(1);background: yellow;}
+}
+/*@keyframes sec {
+    0%  { transform:scale(0);}
+    25% { transform: scale(0.2);}
+    50% { transform: scale(0.4);}
+    75% { transform: scale(0.6);}
+    100% { transform: scale(1);}
+}*/
+.some {
+    width:300px;
+    height:300px;
+    background: gray;
+    transform:tranlate(1000px,300px);
+    transform:scale(0.3),translate(1000px,0);
+}
+.clock {
+    width:500px;
+    height:20px;
+    background: blue;
+    animation:clock 60s infinite;
+}
+@keyframes clock {
+    0% { transform:rotate(0deg);}
+    100% { transform:rotate(360deg);}
+}
 </style>
 
 
@@ -133,8 +171,11 @@
     <div class="ball" id="foo"></div>
     <div class="sao"></div>
     <div class="hopa"></div>
-    
-
+    <div class="trans">
+        <div class="cir"></div>
+        <div class="some"></div>
+    </div>
+    <div class="clock">60s时钟;  关于在css使用content，即使用css添加内容，做个数字时钟</div>
 
 
     <script>
@@ -158,3 +199,8 @@ transform也只是一些变形而已，要出现慢慢的变化，就得需要tr
 
 
 更多事件支持 ，比如使用hover控制 animation ，js来操控才行。对事件监听。
+
+使用transform的样式覆盖性。 先是：scale 再用tanslate，会有样式覆盖。再如 使用多个animation：one,two; 多个动画加在里面的情况。
+
+
+g关于transform，还有很多好玩的东西。
