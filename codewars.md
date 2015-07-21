@@ -94,7 +94,7 @@ triangleType(7, 12, 8); // return 3 (Obtuse, angles are approx. 34°, 106° and 
 然后我使用`arguments.sort()`来排序，这是一个错误，arguments是一个类数组对象，不是数组，所以不能用`sort()方法`
 可以用`[a,b,c].sort()`,而我又创建新的数组，就变得麻烦了。
 
-one solution:
+#####solution:
 ```javascript
 function triangleType(a, b, c){
   var cmp, sides = [a, b, c].sort(function (a, b) { return a - b });
@@ -111,3 +111,39 @@ function triangleType(a, b, c){
 codewars:http://www.codewars.com/kata/53907ac3cd51b69f790006c5/solutions/javascript
 
 MDN : https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments
+
+####5.Description:
+
+You're working in a number zoo, and it seems that one of the numbers has gone missing!
+
+Zoo workers have no idea what number is missing, and are too incompetent to figure it out, so they're hiring you to do it for them.
+
+In case the zoo loses another number, they want your program to work regardless of how many numbers the zoo has in total.
+
+Write the function findNumber(array) that takes an array of numbers. The numbers will be unsorted values between 1 and one more than the length of the array. No values will be repeated within the array. Return the number that is missing.
+
+Examples:
+
+findNumber( [1,3] ) => 2
+
+findNumber( [2,3,4] ) => 1
+
+findNumber( [13,11,10,3,2,1,4,5,6,9,7,8] ) => 12
+
+此题比较简单，但一个好方法才是重要的啦。
+
+#####solution：
+
+```javascript
+function findNumber(arr) {
+  for(var i = 1; i < arr.length+1; i+=1){
+    if(arr.indexOf(i) < 0) return i;
+  }
+}
+```
+
+indexOF()方法。
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf

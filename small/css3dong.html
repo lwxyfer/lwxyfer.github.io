@@ -97,17 +97,19 @@
     0% { transform:rotate(30deg);}
     25% { transform:rotate(60deg);}
     50% { transform: scale(1.2,1.2);}
-    100% { transform: translateX(100px);rotate(90deg);}
+    100% { transform: translateX(100px) rotate(90deg);}
 }
 .a5 {
     animation:rota 4s ease 1;
+    transition:2s ease;
 }
 .a5:hover {
     animation: rota 4s ease 1;
+
 }
 @keyframes rota {
-    0% { transform:rotate(0deg)}
-    100% { transform:rotate(360deg)}
+    0% { transform:rotateX(0deg)}
+    100% { transform: rotateX(360deg) scale(1.5,1.5)}
 }
 .hopa {
     width:200px;
@@ -156,6 +158,32 @@
     0% { transform:rotate(0deg);}
     100% { transform:rotate(360deg);}
 }
+#cube-con {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+}
+#cube {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+#cube figure {
+    width: 196px;
+    height: 196px;
+    display: block;
+    position: absolute;
+    border: 2px solid black;
+}
+#cube .front  { transform: rotateY(   0deg ) translateZ( 100px ); }
+#cube .back   { transform: rotateX( 180deg ) translateZ( 100px ); }
+#cube .right  { transform: rotateY(  90deg ) translateZ( 100px ); }
+#cube .left   { transform: rotateY( -90deg ) translateZ( 100px ); }
+#cube .top    { transform: rotateX(  90deg ) translateZ( 100px ); }
+#cube .bottom { transform: rotateX( -90deg ) translateZ( 100px ); }
+#cube { transform: translateZ( -100px ); }
 </style>
 
 
@@ -176,6 +204,16 @@
         <div class="some"></div>
     </div>
     <div class="clock">60s时钟;  关于在css使用content，即使用css添加内容，做个数字时钟</div>
+    <section id="cube-con">
+  <div id="cube">
+    <figure class="front">1</figure>
+    <figure class="back">2</figure>
+    <figure class="right">3</figure>
+    <figure class="left">4</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">6</figure>
+  </div>
+</section>
 
 
     <script>
@@ -204,3 +242,18 @@ transform也只是一些变形而已，要出现慢慢的变化，就得需要tr
 
 
 g关于transform，还有很多好玩的东西。
+
+
+
+
+animation-name[动画名称]
+animation-duration[动画时间]
+animation-timing-function[播放方式]
+animation-delay[开始播放时间]
+animation-iteration-count[播放次数]
+animation-direction[播放方向]
+animation-fill-mode[播放后的状态]
+animation-play-state[对象动画的状态]
+
+-webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+transition:width 2s, height 2s, background-color 2s, transform 2s;
