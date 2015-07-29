@@ -184,11 +184,31 @@
 #cube .top    { transform: rotateX(  90deg ) translateZ( 100px ); }
 #cube .bottom { transform: rotateX( -90deg ) translateZ( 100px ); }
 #cube { transform: translateZ( -100px ); }
+.time {
+    color:red;
+    animation:ti 1s;
+}
+.time2 {
+    color:red;
+    
+    animation:ti 1s 0.8s;
+}
+@keyframes ti {
+    0% {
+        font-size:800px;
+        display:block;
+    }
+    100% {
+        font-size:20px;
+    }
+}
 </style>
 
 
 </head>
 <body>
+<div class="time">5</div>
+<div class="time2">4</div>
     <img src="img/f1.jpg" alt="" class="a1">
     <img src="img/f1.jpg" alt="" class="a2">
     <img src="img/f1.jpg" alt="" class="a3">
@@ -213,6 +233,7 @@
     <figure class="top">5</figure>
     <figure class="bottom">6</figure>
   </div>
+  
 </section>
 
 
