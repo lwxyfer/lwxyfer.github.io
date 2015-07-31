@@ -147,3 +147,42 @@ indexOF()方法。
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+####6.Description:
+http://www.codewars.com/kata/christmas-tree/solutions?show-solutions=1
+
+Create a function christmasTree(height) that returns a christmas tree of the correct height
+
+christmasTree(5) should return:
+```
+-
+    *
+   ***
+  *****  
+ *******
+*********
+```
+Height passed is always an integer between 0 and 100.
+
+Use \n for newlines between each line.
+
+Pad with spaces so each line is the same length. The last line having only stars, no spaces.
+#####solution:
+```javascript
+function christmasTree(height) {
+  var tree = [];
+  for(var i = 1; i <= height; i++) {
+    tree.push(" ".repeat(height - i) + "*".repeat((i - 1) * 2 + 1) + " ".repeat(height - i));
+  }
+  return tree.join("\n");
+}
+
+String.prototype.repeat = function(n)
+{
+    return new Array(n+1).join(this);
+}
+```
+此方法使用了str.repeat(count)
+注意这里的String.prototype.repeat  属于ECMAScrip 6新增的。
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
+此方法直接把所有的'\*'和空格都放到一个数字，然后数组的`join()`输出tree。
+还是是push的利用。
