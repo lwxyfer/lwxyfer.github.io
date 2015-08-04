@@ -6,12 +6,12 @@
     <style>
     .block {
         width:300px;
-        height:800px;
+        height:200px;
     }
-    .focus {
-        width:20px;
-        height:20px;
-        background:red;
+    #rich {
+        width:400px;
+        height:400px;
+        border:5px solid black;
     }
     </style>
 </head>
@@ -28,7 +28,22 @@
     <input type="reset" value="重置"> 
 </form>
 <div class="block"></div>
-<div class="focus" id="ff"></div>
+
+<h1>富文本编辑--richedit</h1>
+<h2>一：iframer 内联框架</h2>
+<iframe name="richedit" id="richedit" src="blank.html" frameborder="5" style="width:300px;height=300px" ></iframe>
+<h2>er: contentEditable</h2>
+<input type="button" value="bold" class="bold">
+<input type="button" value="backcolor" class="bold">
+<input type="button" value="bold" class="bold">
+<input type="button" value="bold" class="bold">
+
+<ul>
+    <li>加粗</li>
+    <li>背景色</li>
+    <li>字体颜色</li>
+</ul>
+<div id="rich" contentEditable>contentEditable</div>
     <script src="form.js"></script>
 </body>
 </html>

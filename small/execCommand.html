@@ -1,0 +1,135 @@
+<HTML>
+        <HEAD>
+            <TITLE>JavaScript--execCommand指令集</TITLE>
+            <meta charset="UTF-8">
+            <SCRIPT LANGUAGE="javascript">
+
+function fn_doufucopy(){
+edit.select();
+document.execCommand('Copy');
+}
+function fn_doufupaste() {
+tt.focus();
+document.execCommand('paste');
+}
+function fn_creatlink()
+{
+     document.execCommand('CreateLink',true,'true');//弹出一个对话框输入URL
+     //document.execCommand('CreateLink',false,'http://www.51js.com');
+}
+function fn_change_backcolor()
+{
+     document.execCommand('BackColor',true,'#FFbbDD');//true或false都可以
+}
+function fn_change_forecolor()
+{
+//指定前景色
+document.execCommand('FortColor',false,'#BBDDCC');//true或false都可以
+//指定背景色
+document.execCommand('FontSize',false,7);      //true或false都可以
+//字体必须是系统支持的字体
+document.execCommand('FontName',false,'标楷体');      //true或false都可以
+//字体变粗
+document.execCommand('Bold');
+//变斜体
+document.execCommand('Italic');
+}
+function fn_change_selection()
+{
+//将选中的文字加下划线
+document.execCommand('Underline');
+//在选中的文字上划粗线
+document.execCommand('StrikeThrough');
+//将选中的部分文字变细
+document.execCommand('SuperScript');
+//将选中区块的下划线取消掉
+document.execCommand('Underline');
+}
+function fn_format()
+{
+//有序列排列
+document.execCommand('InsertOrderedList');
+//实心无序列排列
+document.execCommand('InsertUnorderedList');
+//空心无序列排列
+document.execCommand('Indent');
+}
+function fn_CutOrDel()
+{
+//删除选中的区块
+//document.execCommand('Delete');
+//剪下选中的区块
+document.execCommand('Cut');
+}
+function fn_InsObj()
+{
+//重设为一个fieldset
+//插入一个水平线
+//document.execCommand('InsertHorizontalRule',true,"aa");
+//插入一个iframe
+//document.execCommand('InsertIFrame',true,"aa");
+//插入一个InsertImage,设为true时需要图片,false时不需图片
+//document.execCommand('InsertImage',false,"aa");
+//插入一个checkbox
+//document.execCommand('InsertInputCheckbox',true,"aa");
+//插入一个file类型的object
+//document.execCommand('InsertInputFileUpload',false,"aa");
+//插入一个hidden
+//插入一个InputImage
+//插入一个Password
+//document.execCommand('InsertInputPassword',true,"aa");
+//插入一个Radio
+//document.execCommand('InsertInputRadio',false,"aa");
+//插入一个Reset
+//document.execCommand('InsertInputReset',true,"aa");
+//插入一个Submit
+//document.execCommand('InsertInputSubmit',false,"aa");
+//插入一个input text
+//document.execCommand('InsertInputText',false,"aa");
+//插入一个textarea
+//document.execCommand('InsertTextArea',true,"aa");
+//插入一个 select list box
+//document.execCommand('InsertSelectListbox',false,"aa");
+//插入一个single select
+document.execCommand('InsertSelectDropdown',true,"aa");
+//插入一个line break(硬回车??)
+//document.execCommand('InsertParagraph');
+//插入一个marquee
+//用于取消选中的阴影部分
+//document.execCommand('Unselect');
+//选中页面上的所有元素
+//document.execCommand('SelectAll');
+}
+function fn_save()
+{
+//第二个参数为欲保存的文件名
+document.execCommand('SaveAs','mycodes.txt');
+//打印整个页面
+//document.execCommand('print');
+}
+            </SCRIPT>
+        </HEAD>
+        <body contentEditable>
+            <input id="edit" value="范例" NAME="edit"><br>
+            <button onclick="fn_doufucopy()" ID="Button1">Copy</button> <button onclick="fn_doufupaste()" ID="Button2">
+                 paste</button><br>
+            <textarea id="tt" rows="10" cols="50" NAME="tt"></textarea>
+            <hr>
+            <br>
+            浮沉聚散变化又再,但是总可卷土重来.<br>
+            天若有情天亦老,人间正道是沧桑.<br>
+            都怪我,太执着,却也等不到花开叶落.<br>
+            <br>
+            Please select above letters, then click following buttons:<br>
+            <hr>
+            <input type="button" value="创建CreateLink" onclick="fn_creatlink()" ID="Button3" NAME="Button3"><br>
+            <input type="button" value="改变文字背景色" onclick="fn_change_backcolor()" ID="Button4" NAME="Button4"><br>
+            <input type="button" value="改变文字前景色" onclick="fn_change_forecolor()" ID="Button5" NAME="Button5"><br>
+            <input type="button" value="给文字加线条" onclick="fn_change_selection()" ID="Button6" NAME="Button6"><br>
+            <input type="button" value="改变文字的排列" onclick="fn_format()" ID="Button7" NAME="Button7"><br>
+            <input type="button" value="删除或剪下选中的部分" onclick="fn_CutOrDel()" ID="Button8" NAME="Button8"><br>
+            <input type="button" value="插入Object" onclick="fn_InsObj()" ID="Button9" NAME="Button9"><br>
+            <input type="button" value="保存或打印文件" onclick="fn_save()" ID="Button10" NAME="Button10"><br>
+            <input type="button" value="测试Refresh属性" onclick="document.execCommand('Refresh')" ID="Button11"       NAME="Button11">
+        </body>
+</HTML>
