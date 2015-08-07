@@ -2,7 +2,7 @@
 记录一些有趣的问题，好玩的问题。
 <hr>
 
-####1. Description:
+###1. Description:
 
 You must create a function, `spread`, that takes a function and a list of arguments to be applied to that function. You must make this function return the result of calling the given function/lambda with the given arguments.
 
@@ -28,7 +28,7 @@ syntax:
 
 ``fun.apply(thisArg[, argsArray])``
 
-####2.运算符用法
+###2.运算符用法
 
 ```javascript
 return result > 0 ? "Battle Result: Good triumphs over Evil" :
@@ -39,7 +39,7 @@ return result > 0 ? "Battle Result: Good triumphs over Evil" :
 
 关于运算符的嵌套与扩展
 
-####3.Description:
+###3.Description:
 
 You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
 
@@ -67,7 +67,7 @@ function isValidWalk(walk) {
 上面解法最简单了，还很多有趣的在：
 http://www.codewars.com/kata/take-a-ten-minute-walk/solutions/javascript
 
-####4.Description:
+###4.Description:
 
 In this kata, you should calculate type of triangle with three given sides a, b and c (given in any order).
 
@@ -94,7 +94,7 @@ triangleType(7, 12, 8); // return 3 (Obtuse, angles are approx. 34°, 106° and 
 然后我使用`arguments.sort()`来排序，这是一个错误，arguments是一个类数组对象，不是数组，所以不能用`sort()方法`
 可以用`[a,b,c].sort()`,而我又创建新的数组，就变得麻烦了。
 
-#####solution:
+###solution:
 ```javascript
 function triangleType(a, b, c){
   var cmp, sides = [a, b, c].sort(function (a, b) { return a - b });
@@ -112,7 +112,7 @@ codewars:http://www.codewars.com/kata/53907ac3cd51b69f790006c5/solutions/javascr
 
 MDN : https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments
 
-####5.Description:
+###5.Description:
 
 You're working in a number zoo, and it seems that one of the numbers has gone missing!
 
@@ -132,7 +132,7 @@ findNumber( [13,11,10,3,2,1,4,5,6,9,7,8] ) => 12
 
 此题比较简单，但一个好方法才是重要的啦。
 
-#####solution：
+###solution：
 
 ```javascript
 function findNumber(arr) {
@@ -147,8 +147,9 @@ indexOF()方法。
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-####6.Description:
-http://www.codewars.com/kata/christmas-tree/solutions?show-solutions=1
+###6.Description:
+
+[http://www.codewars.com/kata/christmas-tree/solutions?show-solutions=1][1]
 
 Create a function christmasTree(height) that returns a christmas tree of the correct height
 
@@ -166,7 +167,7 @@ Height passed is always an integer between 0 and 100.
 Use \n for newlines between each line.
 
 Pad with spaces so each line is the same length. The last line having only stars, no spaces.
-#####solution:
+###solution:
 ```javascript
 function christmasTree(height) {
   var tree = [];
@@ -186,3 +187,199 @@ String.prototype.repeat = function(n)
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
 此方法直接把所有的'\*'和空格都放到一个数字，然后数组的`join()`输出tree。
 还是是push的利用。
+
+###7.Description:
+
+Take the following IPv4 address: 128.32.10.1 This address has 4 octets where each octet is a single byte (or 8 bits).
+
+1st octet 128 has the binary representation: 10000000
+2nd octet 32 has the binary representation: 00100000
+3rd octet 10 has the binary representation: 00001010
+4th octet 1 has the binary representation: 00000001
+So 128.32.10.1 == 10000000.00100000.00001010.00000001
+
+Because the above IP address has 32 bits, we can represent it as the 32 bit number: 2149583361.
+
+Write a function ip_to_int32(ip) ( JS: ipToInt32(ip) ) that takes an IPv4 address and returns a 32 bit number.
+
+  `ipToInt32("128.32.10.1") => 2149583361`
+
+此题比较简单吧。主要是看别人clever的解法。
+###solution：
+```javascript
+function ipToInt32(ip){
+   return ip.split(".").reduce(function(int,v){ return int*256 + +v } )
+}
+```
+1.reduce： https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+2.里面的 `+ +v `
+
+###8.Description:
+http://www.codewars.com/kata/525f50e3b73515a6db000b83/solutions/javascript
+
+Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+
+Example:
+createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) => returns "(123) 456-7890"
+
+The returned format must be correct in order to complete this challenge.
+Don't forget the space after the closing parenthese!
+
+###solution：
+此题感觉没啥重点的啦。不过主要是看别人的解法啦。
+1.`String.prototype.substring()`
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+还可以用： `String.prototype.substr()`
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr
+注意两者的区别！
+```javascript
+function createPhoneNumber(numbers){
+  numbers = numbers.join('');
+  return '(' + numbers.substring(0, 3) + ') '
+      + numbers.substring(3, 6)
+      + '-'
+      + numbers.substring(6);
+}
+```
+2.看这个就感觉正则必须会啊
+`String.prototype.replace()`
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+```javascript
+function createPhoneNumber(numbers){
+  return numbers.join('').replace(/(...)(...)(.*)/, '($1) $2-$3');
+}
+```
+全部都是基本语法的熟练使用。
+
+###9.Description:
+http://www.codewars.com/kata/526571aae218b8ee490006f4/solutions/javascript
+
+Write a function that takes an (unsigned) integer as input, and returns the number of bits that are equal to one in the binary representation of that number.
+
+Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case
+###solution:
+1.秒啊，秒啊。
+```javascript
+function countBits(n) {
+  for(c=0;n;n>>=1)c+=n&1
+  return c;
+}
+```
+2.
+```javascript
+var countBits = function(n)
+{
+  a = n.toString(2).match(/1/g);
+  return a == null ? 0 : a.length;
+};
+```
+3.我的
+```javascript
+var countBits = function(n) {
+  var num = n.toString(2);
+  var j = 0;
+  for ( var i=0 ;i <num.length; i++) {
+    if( num.charAt(i) == 1 ) {
+      j = j+1;
+    }
+  }
+  return j;
+};
+```
+看到第一种解法，简直就是绝了。巧妙的利用操作符啊。
+而第二种则是使用正则，属于普通的解法，但也是我喜欢的解法。
+而看我的，是最普通的解法。按步骤一步步来。
+
+经搜索此题比较出名，而且第一种做法通过不同语言得到普遍应用。
+
+此题点：
+1. 操作符，
+2. 正则
+3. https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString
+
+###10.Description:
+
+*************************************
+----------
+
+
+http://www.codewars.com/kata/can-you-keep-a-secret/solutions?show-solutions=1
+
+There's no such thing as private properties on a javascript object! But, maybe there are?
+
+Implement a function createSecretHolder(secret) which accepts any value as secret and returns an object with ONLY two methods
+```javascript
+getSecret() which returns the secret
+setSecret() which sets the secret
+var obj = createSecretHolder(5);
+obj.getSecret(); // returns 5
+obj.setSecret(2);
+obj.getSecret(); // returns 2
+```
+###solution:
+```javascript
+function createSecretHolder(secret) {
+  return {
+    getSecret: function() { return secret; },
+    setSecret: function(v) { secret = v; }
+  };
+}
+```
+
+从题看是对象的私有属性。
+此题对我来说关键点比较多：
+对象，函数，私有。
+
+> `此题Mark`
+
+###11.Description:
+
+**********************************
+----------
+
+http://www.codewars.com/kata/54e6533c92449cc251001667/solutions/javascript
+
+
+Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+
+For example:
+```javascript
+uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+uniqueInOrder([1,2,2,3,3])       == [1,2,3]
+```
+###solution:
+```javascript
+var uniqueInOrder = function (iterable)
+{
+  return [].filter.call(iterable, (function (a, i) { return iterable[i - 1] !== a }));
+}
+```
+上面是最简单的解法了。***正是非常需要学习的。***
+一般解法与我自己的解法相似。
+```javascript
+var uniqueInOrder=function(it){
+  if ( typeof it == "string" ) {
+    var it = it.split("")
+  }
+  var arr = new Array();
+  var j=0;
+  for ( var i=0; i< it.length;i++) {
+    if( it[i] !== it[i+1]) {
+        arr[j] = it[i];
+        j = j+1;
+      }
+  }
+  return arr;
+}
+```
+里面改为：`arr.push(it[i])`就更简洁了。
+
+解法知识点：
+***Array.prototype.filter()***：
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+***Function.prototype.call()***:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+重点在于理解`call`，这很关键，涉及函数的构造和调用，还有原型。这是我的梗。
+
+> 此题Mark
