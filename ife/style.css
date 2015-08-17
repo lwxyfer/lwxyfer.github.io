@@ -1,0 +1,192 @@
+html{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+}
+body {
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    font-family:"Microsoft YaHei";
+}
+h1 {
+    margin:0;
+    padding:0;
+    color:#fff;
+    padding-left:12%;
+    line-height: 80px;
+}
+/*div {
+    margin:0;
+    padding:0;
+}*/
+.layout {
+    position:absolute;
+    left:70%;
+    top:15px;
+}
+.layout div {
+    float:left;
+    
+    width:50px;
+}
+.a1 {
+    width:50px;
+    height:50px;
+    margin-right:15px;
+    background-color: #2EE0DA;
+}
+.a2 {
+    width:50px;
+    height:50px;
+    margin-right:15px;
+}
+.a21 {
+    width:50px;
+    height:25px;
+    background-color: #2EE0DA;
+}
+.a22 {
+    width:50px;
+    height:25px;
+    background-color: #23A4DD;
+}
+#b1 {
+    width:25px;
+    height:25px;
+    float:left;
+    margin-left:0px;
+    background-color:#11A5E5;
+}
+#b2 {
+    width:25px;
+    height:25px;
+    margin-left:0px;
+    float:right;
+    background-color:#19CEF9;
+}
+.d1:hover {
+    border:2px solid red;
+    
+    cursor:pointer;
+}
+.header{
+    width:100%;
+    height:80px;
+    background:#27C0D3;
+}
+#main {
+    width:70%;
+    height:400px;
+    display:block;
+    margin:0 auto;
+}
+#one div {
+    overflow:visible !important;
+}
+#two div {
+    overflow:visible !important;
+}
+#three div {
+    overflow:visible !important;
+}
+#four div {
+    overflow:visible !important;
+}
+.con {
+
+    height:20px;  
+}
+.sec {
+    height:20px;
+}
+li:first-child {
+    border-bottom:3px solid green;
+}
+li {
+    float:left;
+    display:inline-block;
+    list-style-type:none;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+}
+li:hover {
+    border-bottom:3px solid green !important;
+
+}
+.bj {
+    width:20px;
+    height:20px;
+    display:block;
+    float:left;
+    border-radius: 5px;
+    line-height:10px;
+    background-color:#37C9CB;
+}
+.sh {
+    width:20px;
+    height:20px;
+    display:block;
+    float:left;
+    border-radius: 5px;
+    background-color:#f36022;
+}
+.gz {
+    width:20px;
+    height:20px;
+    display:block;
+    float:left;
+    border-radius: 5px;
+    background-color:#0095DD;
+}
+.block {
+    width:50px;
+    height:20px;
+    float:left;
+}
+.block2 {
+    width:60px;
+    height:20px;
+    float:left;
+}
+#second {
+    width:50%;
+    height:460px;
+    float:left;
+    
+    margin:0 auto;
+}
+#third {
+    width:50%;
+    height:460px;
+    float:left;
+    
+    margin:0 auto;
+}
+#off {
+    width:70%;
+    margin:0 auto;
+}
+#fouth {
+    width:70%;
+    height:418px;
+    margin:0 auto;
+}
+.bo {
+    width:100%;
+    height:0px;
+}
+#down {
+    border-bottom:0px;
+}
+#down1 {
+    border-bottom:0px;
+}
+#down2 {
+    border-bottom:0px;
+}
+.top {
+    border-bottom:3px solid green;
+}
