@@ -428,3 +428,60 @@ var nbrOfLaps = function(x, y) {
 ```
 此题我没有想到写法。***我一直想找最小公约数，没有去想最小公倍数***。败笔。
 看别人写的一起喝成，好啊。
+
+###13.Description:
+
+简单说就是杨辉三角的问题，利用杨辉三角的性质就可做出来。
+
+http://www.codewars.com/kata/52945ce49bb38560fe0001d9/solutions/javascript
+
+Here you will create the classic pascal's triangle. Your function will be passed the depth of the triangle and you code has to return the corresponding pascal triangle upto that depth
+
+The triangle should be returned as a nested array.
+
+for example:
+
+pascal(5) // should return [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+To build the triangle, start with a single 1 at the top, for each number in the next row you just take the two numbers above it and add them together (except for the edges, which are all "1"). eg
+
+```javascript
+    -
+          [1]
+        [1   1]
+       [1  2  1]
+      [1  3  3  1]
+```
+here you get the 3 by adding the 2 and 1 above it.
+
+###solution:
+```javascript
+function pascal(depth) {
+  var result = []
+  for (var i = 1; i <= depth; ++i) {
+    var row = []
+    for (var j = 0; j < i; ++j) {
+      row.push(j == 0 || j == i - 1 ? 1 : result[i-2][j-1] + result[i-2][j])
+    }
+    result.push(row)
+  }
+  return result
+}
+```
+我的：
+```javascript
+function pascal(d) {
+  if(d==1) return [[1]];
+  var all= [[1]];
+  for ( var i=1;i<d+1;i++) {
+    var arr= [];
+    for( var j=0;j<i;j++) {
+       arr[j] = (all[i-1][j] ? all[i-1][j] : 0 )+ (all[i-1][j-1] ? all[i-1][j-1] : 0 );
+      }
+    all[i]=arr;  
+  }
+  return all.slice(1)  
+}
+```
+先设置了all=[[1]];所以最后要减去第一个，就少了中间的处理步骤。
+
+###14.
