@@ -505,3 +505,38 @@ var numberToPrice = function(n) {
 }
 ```
 主要关心点是在正则表达式上，说来就是我的错。一直没把正则搞好。
+
+###15.Description:
+
+http://www.codewars.com/kata/52223df9e8f98c7aa7000062/solutions/javascript
+
+How can you tell an extrovert from an introvert at NSA? Va gur ryringbef, gur rkgebireg ybbxf ng gur BGURE thl'f fubrf.
+
+I found this joke on USENET, but the punchline is scrambled. Maybe you can decipher it? According to Wikipedia, ROT13 (http://en.wikipedia.org/wiki/ROT13) is frequently used to obfuscate jokes on USENET.
+
+Hint: For this task you're only supposed to substitue characters. Not spaces, punctuation, numbers etc. Test examples:
+
+Test.expect(rot13("EBG13 rknzcyr.") == "ROT13 example.");
+Test.expect(rot13("This is my first ROT13 excercise!") == "Guvf vf zl svefg EBG13 rkprepvfr!")
+
+###solution：
+```javascript
+我的解决方法：
+function rot13(str) {
+    var one = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(""),
+        two = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".split(""),
+        th  = str.split("");
+    for(var i=0;i<th.length;i++) {
+      (one.indexOf(th[i]) !=-1) ? th[i]=two[one.indexOf(th[i])] : th[i] = th[i] ;
+    }
+    return th.join("");
+}
+最简洁：
+function rot13(str) {
+  return str.replace(/[a-z]/ig, function(x){
+    return String.fromCharCode(x.charCodeAt(0) + (x.toLowerCase() <= 'm' ? 13: -13));
+  });
+}
+```
+
+嗯，主要还看别人的，学习学习。
