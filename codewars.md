@@ -538,5 +538,7 @@ function rot13(str) {
   });
 }
 ```
-
+https://en.wikipedia.org/wiki/ROT13
 嗯，主要还看别人的，学习学习。
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
