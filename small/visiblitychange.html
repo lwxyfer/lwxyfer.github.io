@@ -2,6 +2,8 @@
 <head>
 <meta charset="utf-8">
 <title>这是一个测试</title>
+<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <style>
 
 /* good */
@@ -15,20 +17,40 @@ div::before {
 }
 </style>
 <script>
-document.addEventListener('visibilitychange',function(){
-    if(document.visibilityState=='hidden') {
+document.addEventListener('webkitvisibilitychange',function(){
+    if(document.webkitVisibilityState=='hidden') {
         normal_title=document.title;
         document.title='快给我回来';
     }
     else
         document.title=normal_title;
 });
+
+/**
+ * getLocation
+ * 看来自带的地理位置信息获取不能成功
+ * @param  {[type]} position [description]
+ * @return {[type]}          [description]
+ */
+// navigator.geolocation.getCurrentPosition(function(position){
+// drawMapCenteredAt(position.coords.latitude, positions.coords.longitude);
+// }, function(error){
+// console.log("Error code: " + error.code);
+// console.log("Error message: " + error.message);
+// }, {
+// enableHighAccuracy: true,
+// timeout: 5000,
+// maximumAge: 25000
+// });
 </script>
 </head>
 <body>
     
     <div>ddddd</div>
     看title <br>
+    <h1>兼容性： <li>webkit    事件： webkitvisibilitychange  webkitVisibilityState</li>
+    <li>  IE  事件： msvisibilitychange   msVisibilityState  </li>
+    <li>其他的就普通的写法 </li> </h1>
     https://developer.mozilla.org/zh-CN/docs/Web/Events/visibilitychange  
 </body>
 </html>
