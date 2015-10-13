@@ -506,7 +506,7 @@ var numberToPrice = function(n) {
 ```
 主要关心点是在正则表达式上，说来就是我的错。一直没把正则搞好。
 
-###15.Description:
+### 15.Description:
 
 http://www.codewars.com/kata/52223df9e8f98c7aa7000062/solutions/javascript
 
@@ -519,7 +519,7 @@ Hint: For this task you're only supposed to substitue characters. Not spaces, pu
 Test.expect(rot13("EBG13 rknzcyr.") == "ROT13 example.");
 Test.expect(rot13("This is my first ROT13 excercise!") == "Guvf vf zl svefg EBG13 rkprepvfr!")
 
-###solution：
+### solution：
 ```javascript
 我的解决方法：
 function rot13(str) {
@@ -544,7 +544,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
 
 
-###15.Description:
+### 16.Description:
 http://www.codewars.com/kata/advanced-pig-latin/solutions?show-solutions=1
 
 Pig latin is created by taking all the consonants before the first vowel of a word and moving them to the back of the word followed by the letters "ay".
@@ -562,7 +562,7 @@ as well as punctuation.
 "Pizza? Yes please!" => "Izzapay? Esyay easeplay!"
 Your job is to take a string and translate it to Pig Latin. The string will never be undefined but may contain both numbers and letters. A word will never be a combination of numbers and letters. Also, there will never be punctuation at the beginning of a word and the only capital letter in a word will be the first letter meaning there are zero all capitalized words.
 
-###solution：
+### solution：
 ```javascript
 function translate(sentence) {
   return sentence.replace(/\b([bcdfghjklmnpqrstvwxyz]*)(\w+)\b/gi, function(_, first, rest) {
@@ -579,4 +579,18 @@ function translate(sentence) {
 这种一看只有正则是最简单的方法来做。
 从中看出我对正则的不熟悉，还有js的正则方法，replace里的function里的参数，这里三个参数，分别代表匹配的什么。
 
-***/\b([^aeiou]*)(\w+)\b/gi might be much shorter. Excellent solution though. **
+**/\b([^aeiou]*)(\w+)\b/gi might be much shorter. Excellent solution though. ***
+
+### 17:Description:
+http://www.codewars.com/kata/514a024011ea4fb54200004b/solutions/javascript
+
+Write a function that when given a URL as a string, parses out just the domain name and returns it as a string. For example:
+
+domainName("http://github.com/carbonfive/raygun") == "github"
+domainName("http://www.zombie-bites.com") == "zombie-bites"
+domainName("https://www.cnet.com") == "cnet"
+
+### solution:
+参考：http://segmentfault.com/q/1010000003021002/a-1020000003021242
+
+还是正则表达式。正则啊。多练习才行。
