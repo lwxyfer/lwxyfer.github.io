@@ -297,7 +297,7 @@ var countBits = function(n) {
 2. 正则
 3. https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString
 
-###10.Description:
+### 10.Description:
 
 *************************************
 ----------
@@ -316,7 +316,7 @@ obj.getSecret(); // returns 5
 obj.setSecret(2);
 obj.getSecret(); // returns 2
 ```
-###solution:
+### solution:
 ```javascript
 function createSecretHolder(secret) {
   return {
@@ -332,7 +332,7 @@ function createSecretHolder(secret) {
 
 > `此题Mark`
 
-###11.Description:
+### 11.Description:
 
 **********************************
 ----------
@@ -348,7 +348,7 @@ uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
 uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
 uniqueInOrder([1,2,2,3,3])       == [1,2,3]
 ```
-###solution:
+### solution:
 ```javascript
 var uniqueInOrder = function (iterable)
 {
@@ -384,7 +384,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 > 此题Mark
 
-#12.Description:
+### 12.Description:
 http://www.codewars.com/kata/two-joggers/solutions?show-solutions=1
 
 Two Joggers
@@ -418,7 +418,7 @@ Examples
 nbrOfLaps(5, 3); // returns [3, 5]
 nbrOfLaps(4, 6); // returns [3, 2]
 
-###solution:
+### solution:
 ```javascript
 var nbrOfLaps = function(x, y) {
   var lcm = x;
@@ -429,7 +429,7 @@ var nbrOfLaps = function(x, y) {
 此题我没有想到写法。***我一直想找最小公约数，没有去想最小公倍数***。败笔。
 看别人写的一起喝成，好啊。
 
-###13.Description:
+### 13.Description:
 
 简单说就是杨辉三角的问题，利用杨辉三角的性质就可做出来。
 
@@ -453,7 +453,7 @@ To build the triangle, start with a single 1 at the top, for each number in the 
 ```
 here you get the 3 by adding the 2 and 1 above it.
 
-###solution:
+### solution:
 ```javascript
 function pascal(depth) {
   var result = []
@@ -484,7 +484,7 @@ function pascal(d) {
 ```
 先设置了all=[[1]];所以最后要减去第一个，就少了中间的处理步骤。
 
-###14.Description:
+### 14.Description:
 
 http://www.codewars.com/kata/formatting-a-number-as-price/solutions/javascript
 
@@ -498,7 +498,7 @@ Numbers should use the standard comma for every 3 numbers and dot to separate th
 
 function should return a string 'NaN' if the input is not a valid number。
 
-###solution:
+### solution:
 ```javascript
 var numberToPrice = function(n) {
   return typeof n != 'number' ? 'NaN' : n.toFixed(3).replace(/\d$/, '').replace(/(\d)(?=(?:\d{3})+\.)/g, '$1,')
@@ -648,7 +648,7 @@ For example, start with 87:
 
 4884 is a palindrome and we needed 4 steps to obtain it, so `palindrome_chain_length(87) == 4`
 
-###　solution:
+### solution:
 ```javascript
 var palindromeChainLength = function(n) {
     var a=0;
@@ -667,4 +667,16 @@ var palindromeChainLength = function(n) {
 ```
 我觉得自己写的还算好的了。
 成功应用了string、array、number的方法。
-对于闭包和递归函数的使用。
+对于闭包和递归函数的使用。好吧，还有很多要学的。
+```javascript
+function palindromeChainLength(n) {
+  var count = 0, rev = 0;
+  while(n != (rev = parseInt(n.toString().split('').reverse().join('')))) {
+    n += rev;
+    count++;
+  }
+  return count;
+};
+```
+好久没用过while循环啦。
+这才是大神写的嘛。
