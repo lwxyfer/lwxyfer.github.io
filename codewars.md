@@ -628,7 +628,7 @@ function interleave() {
 function.prototype.call()
 2. 有一点注意的是在for循环里的函数的`X`的传入。https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 3. https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-
+slice method can also be called to convert Array-like objects / collections to a new Array. You just bind the method to the object. The arguments inside a function is an example of an 'array-like object'. 类数组对象 和 集合。
 
 ### 19：Description:
 
@@ -680,3 +680,28 @@ function palindromeChainLength(n) {
 ```
 好久没用过while循环啦。
 这才是大神写的嘛。
+
+
+### 20：Description:
+
+Write a program that will calculate the number of trailing zeros in a factorial of a given number.
+```
+N! = 1 * 2 * 3 * 4 ... N
+
+zeros(12) = 2 # 1 * 2 * 3 .. 12 = 479001600
+```
+that has 2 trailing zeros 4790016(00)
+Be careful 1000! has length of 2568 digital numbers.
+
+### solution:
+```javascript
+function zeros (n) {
+  var zs = 0;
+  while(n>0){
+    n=Math.floor(n/5);
+    zs+=n
+  }
+  return zs;
+}
+```
+这提很有意思。基本的题吧，然而我没有想出来。考的是数学吧。
