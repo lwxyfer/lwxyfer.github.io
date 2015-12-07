@@ -705,3 +705,137 @@ function zeros (n) {
 }
 ```
 这提很有意思。基本的题吧，然而我没有想出来。考的是数学吧。
+有2即有5，有2和5，即有10.
+
+### 21：Description:
+http://www.codewars.com/kata/did-i-finish-my-sudoku/solutions?show-solutions=1
+
+Write a function done_or_not passing a board (list[list_lines]) as parameter. If the board is valid return 'Finished!', otherwise return 'Try again!'
+
+Sudoku rules:
+
+Complete the Sudoku puzzle so that each and every row, column, and region contains the numbers one through nine only once.
+
+Rows:
+
+
+
+There are 9 rows in a traditional Sudoku puzzle. Every row must contain the numbers 1, 2, 3, 4, 5, 6, 7, 8, and 9. There may not be any duplicate numbers in any row. In other words, there can not be any rows that are identical.
+
+In the illustration the numbers 5, 3, 1, and 2 are the "givens". They can not be changed. The remaining numbers in black are the numbers that you fill in to complete the row.
+
+Columns:
+
+
+
+There are 9 columns in a traditional Sudoku puzzle. Like the Sudoku rule for rows, every column must also contain the numbers 1, 2, 3, 4, 5, 6, 7, 8, and 9. Again, there may not be any duplicate numbers in any column. Each column will be unique as a result.
+
+In the illustration the numbers 7, 2, and 6 are the "givens". They can not be changed. You fill in the remaining numbers as shown in black to complete the column.
+
+Regions
+
+
+
+A region is a 3x3 box like the one shown to the left. There are 9 regions in a traditional Sudoku puzzle.
+
+Like the Sudoku requirements for rows and columns, every region must also contain the numbers 1, 2, 3, 4, 5, 6, 7, 8, and 9. Duplicate numbers are not permitted in any region. Each region will differ from the other regions.
+
+In the illustration the numbers 1, 2, and 8 are the "givens". They can not be changed. Fill in the remaining numbers as shown in black to complete the region.
+
+Valid board example:
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/364px-Sudoku-by-L2G-20050714_solution.svg.png">
+
+
+For those who don't know the game, here are some information about rules and how to play Sudoku: http://en.wikipedia.org/wiki/Sudoku and http://www.sudokuessentials.com/
+### solution
+```javascript
+//我的解决办法，只完成一半。没有想到好的解决小九宫格里的问题。
+function doneOrNot(board){
+  var same =function(arr) {
+    var a=[];
+    for(var i=0;i<arr.length;i++) {
+      if( a.indexOf(arr[i])==-1) {
+        a.push(arr[i])
+        } else {
+        return 0;
+        }
+     }
+   };
+   var c=[],d=[];
+   for(var j=0;j<9;j++) {
+     if( same(board[j]) ==0 ) return "Try again!";
+     for(var k=0;k<9;k++) {
+       var col=c.push(board[k][j]);
+       if( same(col)==0) return "Try again!";
+       }
+   }
+     return "Finished!"
+}
+```
+正则大法好
+```javascript
+function doneOrNot(a) {
+  return /[^1-9;]|\d{10,}|(\d)(\d*|(.{10})*.{9})\1/.test(a = a.join(";").replace(/,/g, "")) ||
+    /(\d)(?=((\d*,){3})*\d*\1)/.test(a.replace(/\B(?=(\d{3})+\b)|;(?!(.{30})*.{29}$)/g, ","))
+    ? "Try again!" : "Finished!";
+}
+```
+这题的解决办法还是看网站吧，只能说真是聪明啊。
+还是选个简单的解读下吧。
+```javascript
+function doneOrNot(board) {
+  var i, j, flipped = [], blocks = [];
+
+  function validArray(array) { return array.slice().sort().join('') === "123456789";  }
+
+  for (i = 0; i < 9; i++) {
+    flipped[i] = []; blocks[i] = [];
+    for (j = 0; j < 9; j++) {
+      flipped[i][j] = board[j][i];
+      blocks[i][j] = board[3*(i%3) + (j/3|0)][j%3 + 3*(i/3|0)];
+    }
+  }
+  return board.every(validArray) && flipped.every(validArray) && blocks.every(validArray) ? 'Finished!' : 'Try again!';
+}
+```
+上面循环写的，简直漂亮
+
+
+### 22:Description:
+
+http://www.codewars.com/kata/52f4261c95d6bff39a003096/solutions/javascript
+
+Given an unsorted array of integer values, find the maximum positive sum of any contiguous range within the array.
+
+An array containing only negative values can return 0. Your solution should be efficient enough to not throw a timeout exception.
+
+Example:
+
+maxContiguousSum([3, -4, 8, 7, -10, 19, -3]); // returns 24
+maxContiguousSum([-8, -10, -12, -2, -3, 5]); // returns 5
+Visual example:
+```
+[3, -4, 8, 7, -10, 19, -3]
+       |_____________|
+             ||
+             \/
+             24
+```
+
+### solution:
+```javascript
+function maxContiguousSum (arr) {
+  var max = 0, sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum += arr[i];
+    if (sum > max) {
+      max = sum
+    }
+    if (sum < 0 ) {
+      sum = 0;
+    }
+  }
+  return max;
+}
+```
+有时候我忽略了很重要的东西：就如函数式编程一样，注重的是what to do，我们要的是结果，give me the correct answer. AS such examples, I need more. I should code more.
