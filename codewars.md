@@ -839,3 +839,19 @@ function maxContiguousSum (arr) {
 }
 ```
 有时候我忽略了很重要的东西：就如函数式编程一样，注重的是what to do，我们要的是结果，give me the correct answer. AS such examples, I need more. I should code more.
+
+### 23：Description:
+http://www.codewars.com/kata/least-common-multiple/solutions/javascript?show-solutions=1
+Write a function that calculates the least common multiple of its arguments; each argument is assumed to be a non-negative integer.
+简单说就是求最小公倍数。
+
+### solution:
+```javascript
+var lcm = function () {
+  function gcd(a,b) {
+    if (a == 0) return b;
+    return gcd(b%a, a);
+  }
+  return Array.prototype.slice.apply(arguments).reduce(function(a,b) {return a*b / gcd(a,b);}, 1);
+};
+```
