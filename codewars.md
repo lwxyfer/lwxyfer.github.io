@@ -855,3 +855,42 @@ var lcm = function () {
   return Array.prototype.slice.apply(arguments).reduce(function(a,b) {return a*b / gcd(a,b);}, 1);
 };
 ```
+
+
+### 24：Description:
+
+Given the triangle of consecutive odd numbers:
+```
+eg:
+             1
+          3     5
+       7     9    11
+   13    15    17    19
+21    23    25    27    29
+...
+```
+Calculate the row sums of this triangle from the row index (starting at index 1) e.g.:
+
+rowSumOddNumbers(1); // 1
+rowSumOddNumbers(2); // 3 + 5 = 8
+
+### solution：
+我的解法
+```javascript
+function rowSumOddNumbers(n) {
+      var a = 1;
+      var b = 0
+      for(var i=1; i<n; i++) {
+        a = a + 2*i;
+        b += i;
+      }
+      return a*n + b*2;
+}
+```
+```javascript
+function rowSumOddNumbers(n) {
+  return Math.pow(n, 3);
+}
+```
+
+这里就是数学的魅力了。看我自己的，明显就是脑筋不灵活。而别人就洞穿一切了。啦啦啦。所以这题还是比较有意思的。
