@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数式编程</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<style>
+h1 { border-left: 3px solid #4fc08d; }
+</style>
+</head>
+<body><div class="container"><h1 id="函数式编程-函数式js-javascript函数">函数式编程 &amp;　函数式JS &amp; JavaScript函数</h1>
+
+<p>标签（空格分隔）： javascript</p>
+
+<hr>
+
+<p>本文就用来详解JavaScript函数式编程相关。看了这么多函数式，函数式，但我却一直迷糊，所以就此深入探讨学习<strong>函数式JS FP</strong>。并且 再深入探讨 <strong>面向对象编程OOP</strong>，<strong>命令式编程Imperative Programming</strong></p>
+
+<p><strong>编程范式</strong> <br>
+<strong>OOP FP IP　三个编程范式</strong> <br>
+通过WIKI，可以看到不同的<strong>Programming paradigms</strong>分类。</p>
+
+<p><div class="toc">
+<ul>
+<li><a href="#函数式编程-函数式js-javascript函数">函数式编程 &amp;　函数式JS &amp; JavaScript函数</a><ul>
+<li><ul>
+<li><a href="#1functional-programming">1：Functional Programming</a></li>
+<li><a href="#2oop-vs-fp">2：OOP vs FP</a></li>
+<li><a href="#3functional-programming-vs-imperative-programming">3：Functional Programming vs. Imperative Programming</a></li>
+</ul>
+</li>
+<li><a href="#函数式编程">函数式编程</a><ul>
+<li><a href="#历史">历史</a></li>
+<li><a href="#简介">简介</a></li>
+<li><a href="#wiki-know-everything">WIKI ： know everything</a></li>
+<li><a href="#术语">术语</a></li>
+<li><a href="#更多">更多</a></li>
+</ul>
+</li>
+<li><a href="#函数式javascript">函数式JavaScript</a><ul>
+<li><a href="#get">Get</a></li>
+<li><a href="#对于js本身">对于JS本身</a></li>
+<li><a href="#js">JS</a></li>
+<li><a href="#underscorejs">underscore.js</a></li>
+<li><a href="#函数式js的实践">函数式JS的实践</a></li>
+<li><a href="#深入函数式">深入函数式</a></li>
+</ul>
+</li>
+<li><a href="#todo不仅是函数式而且是js函数的深入学习">TODO，不仅是函数式，而且是JS函数的深入学习</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</p>
+
+
+
+<h3 id="1functional-programming">1：Functional Programming</h3>
+
+<p><a href="http://scott.sauyet.com/Javascript/Talk/FunctionalProgramming/">http://scott.sauyet.com/Javascript/Talk/FunctionalProgramming/</a> <br>
+此文从函数式编程基础到 JS的实践 ，通过实例说明函数式。介绍了迭代，递归，curry，.then ，主要是各种简单的介绍，对比很多方法的优缺点。内容较多。 <br>
+包含很多重要的概念。好吧，得承认这篇文章写的很好。争取翻译此文。</p>
+
+
+
+<h3 id="2oop-vs-fp">2：OOP vs FP</h3>
+
+<p><a href="http://raganwald.com/2013/04/08/functional-vs-OOP.html">http://raganwald.com/2013/04/08/functional-vs-OOP.html</a></p>
+
+
+
+<h3 id="3functional-programming-vs-imperative-programming">3：Functional Programming vs. Imperative Programming</h3>
+
+<p>函数式与命令式 <br>
+<a href="https://msdn.microsoft.com/en-us/library/bb669144.aspx">https://msdn.microsoft.com/en-us/library/bb669144.aspx</a></p>
+
+
+
+<h2 id="函数式编程">函数式编程</h2>
+
+<p>总览：WIKI：函数式编程： <a href="https://en.wikipedia.org/wiki/Functional_programming">https://en.wikipedia.org/wiki/Functional_programming</a> <br>
+这里的总结当然看WIKI就行啦。其实WIKI就能解决很多问题啦。毕竟不会深入进去的，关注点在JS上。</p>
+
+
+
+<h3 id="历史">历史</h3>
+
+<p>lambda 演算 开始发展：lambda 演算的本质为 一切皆函数，函数可以作为另外一个函数的输出或者 / 和输入，一系列的函数使用最终会形成一个表达式链，这个表达式链可以最终求得一个值，而这个过程，即为计算的本质。一位 MIT 的教授 John McCarthy 在冯 . 诺依曼体系的机器上成功的实现了 lambda 理论，取名为 LISP(LISt Processor), 至此函数式编程语言便开始活跃于计算机科学领域。 <br>
+函数式编程语言：haskell lisp 等；</p>
+
+
+
+<h3 id="简介">简介</h3>
+
+<p><a href="http://www.zhihu.com/question/28292740">http://www.zhihu.com/question/28292740</a>  把概念讲的很清晰。基本的定义以及函数式编程的特性。 <br>
+主要是知道这些特性，特点。</p>
+
+<p>函数式编程是一种编程范式，我们常见的编程范式有 命令式编程（Imperative programming）， 函数式编程， 逻辑式编程，常见的面向对象编程是也是一种命令式编程。</p>
+
+<p>命令式编程是面向 计算机硬件的抽象，有 变量（对应着存储单元）， 赋值语句（获取，存储指令）， 表达式（内存引用和算术运算）和 控制语句（跳转指令），一句话，命令式程序就是一个 冯诺依曼机的 指令序列。</p>
+
+<blockquote>
+  <p>In computer science, functional programming is a programming <br>
+  paradigm—a style of building the structure and elements of computer <br>
+  programs—that treats computation as the evaluation of mathematical <br>
+  functions and avoids changing-state and mutable data.</p>
+  
+  <p>What is the essence of functional programming: is it equational reasoning(no side <br>
+  effect) or is it higher-order functions? There is no clear agreement <br>
+  about the answer to this question.</p>
+</blockquote>
+
+<p>而函数式编程是面向数学的抽象，将计算描述为一种 表达式求值，一句话，函数式程序就是一个 表达式。而又把函数式的这种范式叫做 Declarative Programming – 声明式编程。</p>
+
+
+
+<h3 id="wiki-know-everything">WIKI ： know everything</h3>
+
+<p><strong>Concepts</strong></p>
+
+<ul>
+<li>2.1  First-class and higher-order functions</li>
+<li>2.2  Pure functions</li>
+<li>2.3  Recursion</li>
+<li>2.4  Strict versus non-strict evaluation</li>
+<li>2.5  Type systems</li>
+<li>2.6  Referential Transparency</li>
+<li>2.7  Functional programming in non-functional languages</li>
+</ul>
+
+<p><strong>Comparison to imperative programming</strong></p>
+
+<ul>
+<li>3.1  Simulating state</li>
+<li>3.2  Efficiency issues</li>
+<li>3.3  Coding styles</li>
+</ul>
+
+
+
+<h3 id="术语">术语</h3>
+
+<p><a href="http://coolshell.cn/articles/10822.html">http://coolshell.cn/articles/10822.html</a></p>
+
+<ul>
+<li>immutable data  不可变数据</li>
+<li>first-class function  所谓一等公民</li>
+<li>tail-recursion 尾递归优化   </li>
+<li>map &amp; reduce</li>
+<li>pipeline</li>
+<li>recursive</li>
+<li>currying</li>
+<li>higher order function</li>
+<li>parallelization 并行  S1 + S2</li>
+<li>lazy evaluation 惰性求值</li>
+<li>determinism 确定性</li>
+<li>pure function 纯函数     与 no side-effect</li>
+<li>pattern match 模式匹配</li>
+<li>no side-effect 没有副作用</li>
+<li>引用透明（Referential transparency）</li>
+<li>偏应用函数（Partially Applied Functions）</li>
+<li>闭包（Closure）</li>
+</ul>
+
+
+
+<h3 id="更多">更多</h3>
+
+<p>初探：<a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">http://www.ruanyifeng.com/blog/2012/04/functional_programming.html</a> <br>
+步进：<a href="http://www.defmacro.org/ramblings/fp.html">http://www.defmacro.org/ramblings/fp.html</a> <br>
+上文翻译：<a href="https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn/blob/master/FunctionalProgrammingForTheRestOfUs.cn.md">https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn/blob/master/FunctionalProgrammingForTheRestOfUs.cn.md</a> <br>
+Link：<a href="http://janfan.github.io/chinese/2015/05/18/functional-programming.html">http://janfan.github.io/chinese/2015/05/18/functional-programming.html</a> <br>
+Link：<a href="http://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming">http://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming</a> <br>
+Link：<a href="http://stackoverflow.com/questions/5226055/truly-understanding-the-difference-between-procedural-and-functional">http://stackoverflow.com/questions/5226055/truly-understanding-the-difference-between-procedural-and-functional</a> <br>
+declaration/function VS  imperative/procedural <br>
+Link：<a href="http://stackoverflow.com/questions/552336/oop-vs-functional-programming-vs-procedural">http://stackoverflow.com/questions/552336/oop-vs-functional-programming-vs-procedural</a></p>
+
+<p>需要理解术语与术语的解释。还有是翻译，与翻译后的名词。</p>
+
+
+
+<h2 id="函数式javascript">函数式JavaScript</h2>
+
+<p>先讲清楚JS函数，再来理清楚函数式JS。毕竟，函数式说来是一种范式，一种概念。 <br>
+理解JS函数式编程这种思想思维。正如前面所说的，这是一种编程范式，而不是一种具体的技术。知道基本的概念，而主要探索的是其中的特性，与通过某种手段让JS实现原本所不具有的特性。或者说我们谈论的是编程风格，函数式的编程风格。</p>
+
+<p><a href="http://scott.sauyet.com/Javascript/Talk/FunctionalProgramming/#slide-20">http://scott.sauyet.com/Javascript/Talk/FunctionalProgramming/#slide-20</a>  <br>
+函数式在JS中的具有的与不具有的函数式特性。</p>
+
+<p>再谈实例的话： <br>
+如curring 柯里化： 我们可以手动实现柯理化，就是以这种风格写代码。使用库的话，就是提供了柯理化的方法。<code>curry()</code></p>
+
+
+
+<h3 id="get">Get</h3>
+
+<ul>
+<li>first-class function</li>
+<li>Lambdas/Anonymous Functions with closures</li>
+<li>Compact, even terse, functions</li>
+</ul>
+
+
+
+<h3 id="对于js本身">对于JS本身</h3>
+
+<p><a href="http://www.hunlock.com/blogs/Functional_Javascript">http://www.hunlock.com/blogs/Functional_Javascript</a>  <br>
+这里说的是JS本身所具有的。简单的来说就是JS函数。而不像其他的对于函数式JS的讲解通过库实现某些特点。 <br>
+非术语来表示的。</p>
+
+
+
+<h3 id="js">JS</h3>
+
+<ul>
+<li>Procedural functions</li>
+<li>functions as variables</li>
+<li>Pass functions to functions</li>
+<li>Lambda</li>
+<li>anonymous functions</li>
+<li>self-invoking functions</li>
+<li>Function pointers</li>
+<li>Function scope</li>
+<li>functions  as objects</li>
+<li>function objects and methods</li>
+<li>function arguments</li>
+</ul>
+
+
+
+<h3 id="underscorejs">underscore.js</h3>
+
+<p>Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.意思可以让我们呢大概完全模拟函数式编程的风格。</p>
+
+<ul>
+<li><a href="http://icodeit.org/2015/02/functional-programming-in-underscore-dot-js/">http://icodeit.org/2015/02/functional-programming-in-underscore-dot-js/</a></li>
+<li><a href="https://juntao.gitbooks.io/fun-with-underscore/content/index.html">https://juntao.gitbooks.io/fun-with-underscore/content/index.html</a></li>
+<li><a href="http://underscorejs.org/">http://underscorejs.org/</a></li>
+</ul>
+
+
+
+<h3 id="函数式js的实践">函数式JS的实践</h3>
+
+<p>内含jquery的简单例子 <br>
+<a href="https://www.ibm.com/developerworks/cn/web/1006_qiujt_jsfunctional/">https://www.ibm.com/developerworks/cn/web/1006_qiujt_jsfunctional/</a></p>
+
+
+
+<h3 id="深入函数式">深入函数式</h3>
+
+<p><a href="https://drboolean.gitbooks.io/mostly-adequate-guide/content/">https://drboolean.gitbooks.io/mostly-adequate-guide/content/</a> <br>
+<a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html">https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html</a>（翻译：名词较多）</p>
+
+
+
+<h2 id="todo不仅是函数式而且是js函数的深入学习">TODO，不仅是函数式，而且是JS函数的深入学习</h2>
+
+<p>这里的几个把JS函数讲的很明白</p>
+
+<p>NEED ES6 : <a href="http://blog.oyanglul.us/javascript/functional-javascript.html">http://blog.oyanglul.us/javascript/functional-javascript.html</a>  值得看。 <br>
+一个系列的文章：<a href="http://blog.jobbole.com/72810/">http://blog.jobbole.com/72810/</a> <br>
+A book : <a href="http://eloquentjavascript.net/">http://eloquentjavascript.net/</a> <br>
+书里的function： <a href="http://eloquentjavascript.net/03_functions.html">http://eloquentjavascript.net/03_functions.html</a> <br>
+functional JS： <a href="http://www.hunlock.com/blogs/Functional_Javascript">http://www.hunlock.com/blogs/Functional_Javascript</a></p>
+
+<p>And more: 我的视野不仅应是在语法，技术上，要从更高更广的地方看。</p></div></body>
+</html>
