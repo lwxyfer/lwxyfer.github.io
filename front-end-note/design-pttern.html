@@ -13,7 +13,7 @@ h1 { border-left: 3px solid #4fc08d; }
 
 <blockquote>
   <p>此文通过书籍：《learn design pattern》详细解释关于JS的设计模式。也就是那十几种模式。然后再对MVC、MVVM等深入学习。那么就是读书笔记以及扩展啦。 <br>
-  ToDo:</p>
+  TODO:</p>
   
   <ul>
   <li>Achieve TODOmvc examples: <a href="http://todomvc.com/">http://todomvc.com/</a></li>
@@ -21,9 +21,36 @@ h1 { border-left: 3px solid #4fc08d; }
   <li>learn to use such as Vue.js BACKBONE AUGULAR. Finish something that is useful</li>
   <li>understand AMD &amp; CMD standard。</li>
   <li>最后注意中英文翻译的差异</li>
-  <li>AMD模块 CommonJS 模块</li>
+  <li>AMD CommonJS 规范 </li>
   </ul>
 </blockquote>
+
+<p>第一次总结： <br>
+由于此文内容较多，算是 《learn design pattern》 这本书的简单学习吧。前面部分细读了，后面就晕了，就简单粗读了。 <br>
+此文关注点：</p>
+
+<ul>
+<li>类 概念、定义、模仿（simulate）</li>
+<li>对象 概念、创建、属性、方法 <br>
+<ul><li>设计模式针对的点： 在（软件开发）对象和类；那么在JS就是模拟类 </li></ul></li>
+<li>各种设计模式 <br>
+<ul><li>这是本文写作的目的，就是明白这几种设计模式，不过最终还是得实践才行。</li>
+<li>本文主要讨论这个点。其他另外做文。 </li></ul></li>
+<li>MV* 架构模式 <br>
+<ul><li>此文做简介，需详细深入</li>
+<li>MVC/MVP/MVVM 等 == 主流框架的学习和实践</li>
+<li>backbone &amp; Vue.js 彻底实践 </li>
+<li>组件？？？</li></ul></li>
+<li>模块化 <br>
+<ul><li>AMD</li>
+<li>CMD</li>
+<li>CommonJS</li>
+<li>ES6 Harmony    </li></ul></li>
+<li>JQuery插件 <br>
+<ul><li>插件的编写规范，模式 </li></ul></li>
+<li>命名变量空间 <br>
+<ul><li>正好解决了我想解决的问题和困惑 </li></ul></li>
+</ul>
 
 <p><div class="toc">
 <ul>
@@ -52,14 +79,24 @@ h1 { border-left: 3px solid #4fc08d; }
 <li><a href="#mediator">Mediator</a></li>
 <li><a href="#prototype">Prototype</a></li>
 <li><a href="#command">Command</a></li>
+<li><a href="#facade">Facade</a></li>
+<li><a href="#factory">Factory</a></li>
+<li><a href="#mixin">Mixin</a></li>
+<li><a href="#decorator">Decorator</a></li>
+<li><a href="#flyweight">Flyweight</a></li>
 </ul>
 </li>
-<li><a href="#javascript-mv-模式">JavaScript MV* 模式</a></li>
+<li><a href="#javascript-mv-架构模式">JavaScript MV* 架构模式</a></li>
 <li><a href="#模块化的javascript">模块化的JavaScript</a><ul>
 <li><a href="#scripts-loaders">Scripts Loaders</a></li>
 <li><a href="#amd-asynchronous-module-definition">AMD ：Asynchronous Module Definition</a></li>
+<li><a href="#cmd">CMD</a></li>
+<li><a href="#commonjs">CommonJS</a></li>
 </ul>
 </li>
+<li><a href="#jquery-中的设计模式">JQuery 中的设计模式</a></li>
+<li><a href="#jquery-插件的设计模式">JQuery 插件的设计模式</a></li>
+<li><a href="#命名空间模式">命名空间模式</a></li>
 </ul>
 </li>
 </ul>
@@ -133,7 +170,8 @@ h1 { border-left: 3px solid #4fc08d; }
 
 <h3 id="关于类class-说明">关于类：class 说明</h3>
 
-<p><a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">http://www.phpied.com/3-ways-to-define-a-javascript-class/</a></p>
+<p><a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">http://www.phpied.com/3-ways-to-define-a-javascript-class/</a> <br>
+<a href="https://zh.wikipedia.org/wiki/%E7%B1%BB_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)">https://zh.wikipedia.org/wiki/%E7%B1%BB_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)</a></p>
 
 <p>这里我要理解类的概念 <br>
 JavaScript是一种弱类型语言，不过类可以通过函数模拟出来。 最常见的实现这一点的方法，是先定义一个JavaScript函数，然后再使用这个新的关键字创建一个对象。可以通过这种方法像下面这样给类定义新的属性与方法。</p>
@@ -626,7 +664,41 @@ console</span><span class="pun">.</span><span class="pln">log</span><span class=
 
 
 
-<h2 id="javascript-mv-模式">JavaScript MV* 模式</h2>
+<h3 id="facade">Facade</h3>
+
+<p>外观模式：又称门面模式</p>
+
+<p>隐藏内在的复杂性，提高一个舒适的对外接口</p>
+
+
+
+<h3 id="factory">Factory</h3>
+
+<p>工厂模式</p>
+
+
+
+<h3 id="mixin">Mixin</h3>
+
+<p>混合模式</p>
+
+
+
+<h3 id="decorator">Decorator</h3>
+
+<p>装饰模式</p>
+
+
+
+<h3 id="flyweight">Flyweight</h3>
+
+<p>享元模式</p>
+
+<p>享元模式是一个优化重复、缓慢和低效数据共享代码的经典结构化解决方案。它的目标是以相关对象尽可能多的共享数据，来减少应用程序中内存的使用(例如：应用程序的配置、状态等)。</p>
+
+
+
+<h2 id="javascript-mv-架构模式">JavaScript MV* 架构模式</h2>
 
 <p>架构模式</p>
 
@@ -672,5 +744,41 @@ console</span><span class="pun">.</span><span class="pln">log</span><span class=
 
 <h3 id="amd-asynchronous-module-definition">AMD ：Asynchronous Module Definition</h3>
 
-<p>A Format For Writing Modular JavaScript In The Browser</p></div></body>
+<p>A Format For Writing Modular JavaScript In The Browser</p>
+
+
+
+<h3 id="cmd">CMD</h3>
+
+
+
+<h3 id="commonjs">CommonJS</h3>
+
+<hr>
+
+
+
+<h2 id="jquery-中的设计模式">JQuery 中的设计模式</h2>
+
+<p>从JQuery的源码分析，源码中所用的设计模式 </p>
+
+
+
+<h2 id="jquery-插件的设计模式">JQuery 插件的设计模式</h2>
+
+<p>涉及简单的JQuery插件开发</p>
+
+
+
+<h2 id="命名空间模式">命名空间模式</h2>
+
+<p>几乎所有重要的 Javascript 程序中都会用到命名空间。除非我们只是编写简单的代码，否则尽力确保正确地实现命名空间是很有必要的。这也能避免自己的代码收到第三方代码的污染。本小节将阐述以下设计模式：</p>
+
+<ul>
+<li>单一全局变量</li>
+<li>对象序列化的表示</li>
+<li>内嵌的命名空间</li>
+<li>即时调用的函数表达式</li>
+<li>命名空间注入</li>
+</ul></div></body>
 </html>
