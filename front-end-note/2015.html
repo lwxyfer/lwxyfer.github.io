@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>总结模式</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<style>
+h1 { border-left: 3px solid #4fc08d; }
+</style>
+</head>
+<body><div class="container"><h1 id="总结模式">总结模式</h1>
+
+<p>先放要总结的链接，被人的总结。然后针对自己最总结。 <br>
+开头：</p>
+
+<blockquote>
+  <p>you have your way ,I have my way. As for the right way,the correct way,the only way,it does’nt exit.</p>
+</blockquote>
+
+<p><a href="https://leohxj.gitbooks.io/front-end-database/content/javascript-design-pattern/index.html">https://leohxj.gitbooks.io/front-end-database/content/javascript-design-pattern/index.html</a></p>
+
+<p><a href="http://jstherightway.org/zh-cn/#patterns">http://jstherightway.org/zh-cn/#patterns</a> </p>
+
+<p><a href="http://www.w3school.com.cn/js/pro_js_object_defining.asp">http://www.w3school.com.cn/js/pro_js_object_defining.asp</a></p>
+
+<p><a href="https://www.quora.com/topic/Front-End-Web-Development">https://www.quora.com/topic/Front-End-Web-Development</a> <br>
+quora这种大型学习网站路线</p>
+
+<p>参看全局性的教程，对比自己知道的东西。</p>
+
+
+
+<h1 id="长期计划">长期计划</h1>
+
+<p>不仅要完成全部的总结，而且包括长期的计划。（物质奖励–自我鼓励计划）</p>
+
+<p><div class="toc">
+<ul>
+<li><a href="#总结模式">总结模式</a></li>
+<li><a href="#长期计划">长期计划</a></li>
+<li><a href="#js的总结">js的总结：</a><ul>
+<li><a href="#basic-grammar">Basic grammar</a></li>
+<li><a href="#array">Array</a><ul>
+<li><a href="#syntax">syntax</a></li>
+<li><a href="#properties">properties</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#array-instances">Array Instances</a><ul>
+<li><a href="#methods-1">Methods</a><ul>
+<li><a href="#mutator-methods-存取器方法">Mutator methods 存取器方法</a></li>
+<li><a href="#accessor-methods">Accessor methods</a></li>
+<li><a href="#iteration-methods">Iteration methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#html">HTML</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</p>
+
+
+
+<h1 id="js的总结">js的总结：</h1>
+
+<p>对象 <br>
+类 <br>
+函数 <br>
+this <br>
+继承 <br>
+作用域 <br>
+原型 <br>
+事件代理，冒泡等 <br>
+onclick等DOM事件 <br>
+架构模式 <br>
+编程范式 <br>
+BOM <br>
+DOM <br>
+window API <br>
+document API</p>
+
+<p><a href="http://www.w3school.com.cn/js/js_htmldom_events.asp">http://www.w3school.com.cn/js/js_htmldom_events.asp</a></p>
+
+
+
+<h2 id="basic-grammar">Basic grammar</h2>
+
+
+
+<h2 id="array">Array</h2>
+
+
+
+<h3 id="syntax">syntax</h3>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="pln">literal </span><span class="pun">：</span><span class="pln"> </span><span class="pun">[</span><span class="pln">ele0</span><span class="pun">,</span><span class="pln">ele1</span><span class="pun">]</span><span class="pln">
+</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Array</span><span class="pun">(</span><span class="pln">ele0</span><span class="pun">,</span><span class="pln">ele1</span><span class="pun">,</span><span class="pln">eleN</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Array</span><span class="pun">(</span><span class="pln">length</span><span class="pun">)</span></code></pre>
+
+<p>Access array elements <br>
+differ length and numerical</p>
+
+
+
+<h3 id="properties">properties</h3>
+
+<ul>
+<li>Array.length</li>
+<li>Array.protorype <br>
+<ul><li>Allows the addition of properties to all array objects.</li></ul></li>
+</ul>
+
+
+
+<h3 id="methods">Methods</h3>
+
+<ul>
+<li>Array.from() <strong>ES6</strong> <br>
+Creates a new Array instance from an array-like or iterable object.</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="com">// Examples</span><span class="pln">
+</span><span class="typ">Array</span><span class="pun">.</span><span class="kwd">from</span><span class="pun">([</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">],</span><span class="pln"> x </span><span class="pun">=&gt;</span><span class="pln"> x </span><span class="pun">+</span><span class="pln"> x</span><span class="pun">);</span><span class="pln">      
+</span><span class="com">// [2, 4, 6]</span><span class="pln">
+</span><span class="typ">Array</span><span class="pun">.</span><span class="kwd">from</span><span class="pun">({</span><span class="pln">length</span><span class="pun">:</span><span class="pln"> </span><span class="lit">5</span><span class="pun">},</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">,</span><span class="pln"> k</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> k</span><span class="pun">);</span><span class="pln">    
+</span><span class="com">// [0, 1, 2, 3, 4]</span></code></pre>
+
+<ul>
+<li><p>Array.isArray()  <br>
+Returns true if a variable is an array, if not false.</p></li>
+<li><p>Array.observe() <strong>Non-standard</strong> <br>
+Asynchronously observes changes to Arrays, similar to Object.observe() for objects. It provides a stream of changes in order of occurrence.</p></li>
+<li><p>Array.of() <br>
+Creates a new Array instance with a variable number of arguments, regardless of number or type of the arguments.</p></li>
+</ul>
+
+
+
+<h3 id="array-instances">Array Instances</h3>
+
+<ul>
+<li>Array.prototype.constructor <br>
+Specifies the function that creates an object’s prototype.</li>
+<li>Array.prototype.length <br>
+Reflects the number of elements in an array.</li>
+</ul>
+
+
+
+<h4 id="methods-1">Methods</h4>
+
+<blockquote>
+  <p>对于方法来说，需要的是：</p>
+  
+  <ol>
+  <li>是否改变原数组</li>
+  <li>调用方法后返回的是什么</li>
+  </ol>
+</blockquote>
+
+
+
+<h5 id="mutator-methods-存取器方法">Mutator methods 存取器方法</h5>
+
+<p>These methods modify the array : <strong>注意返回的值</strong>,并且原数组都被修改。</p>
+
+<ul>
+<li>Array.prototype.copyWithin() <br>
+copyWithin() 方法用于在数组内的替换操作，即替换元素与被替换元素都是数组内的元素。ES6标准</li>
+<li>Array.prototype.fill()</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">].</span><span class="pln">fill</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);</span><span class="pln">               </span><span class="com">// [4, 4, 4]</span><span class="pln">
+</span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">].</span><span class="pln">fill</span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln">            </span><span class="com">// [1, 4, 4]</span><span class="pln">
+</span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">].</span><span class="pln">fill</span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">);</span><span class="pln">         </span><span class="com">// [1, 4, 3]</span></code></pre>
+
+<ul>
+<li>pop() <br>
+Removes the last element from an array and returns that element.</li>
+<li>push() <br>
+Adds one or more elements to the end of an array and returns the new length of the array.</li>
+<li>reverse() <br>
+Reverses the order of the elements of an array in place — the first becomes the last, and the last becomes the first.</li>
+<li>shift() <br>
+Removes the first element from an array and returns that element.</li>
+<li>unshift() <br>
+Adds one or more elements to the front of an array and returns the new length of the array.</li>
+<li>sort() <br>
+Sorts the elements of an array in place and returns the array. <br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort</a></li>
+<li>splice() <br>
+The splice() method changes the content of an array by removing existing elements and/or adding new elements.</li>
+</ul>
+
+
+
+<h5 id="accessor-methods">Accessor methods</h5>
+
+<p>These methods do not modify the array and return some representation of the array. 不改变原数组</p>
+
+<p><strong>Array.prototype.xx()</strong></p>
+
+<ul>
+<li>concat() <br>
+Returns a new array comprised of this array joined with other array(s) and/or value(s).</li>
+<li>includes()</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">].</span><span class="pln">includes</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span><span class="pln">     </span><span class="com">// true</span><span class="pln">
+</span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">].</span><span class="pln">includes</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);</span><span class="pln">     </span><span class="com">// false</span></code></pre>
+
+<ul>
+<li>join() <br>
+The join() method joins all elements of an array into a string.</li>
+<li>slice() <br>
+The slice() method returns a shallow copy of a portion of an array into a new array object.</li>
+<li>toSource()</li>
+<li>toString()</li>
+<li>toLocaleString()</li>
+<li>indexOf()</li>
+<li>lastIndexOf()</li>
+</ul>
+
+
+
+<h5 id="iteration-methods">Iteration methods</h5>
+
+<ul>
+<li>forEach()</li>
+</ul>
+
+<pre class="prettyprint prettyprinted"><code><span class="com">//迭代数组，执行回调函数</span><span class="pln">
+arr</span><span class="pun">.</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">callback</span><span class="pun">[,</span><span class="pln"> thisArg</span><span class="pun">])</span><span class="pln">
+callback</span><span class="pun">:</span><span class="pln"> currentValue index array</span></code></pre>
+
+<ul>
+<li>entries() ES6</li>
+<li>every() <br>
+Returns true if every element in this array satisfies the provided testing function.</li>
+<li>some() <br>
+Returns true if at least one element in this array satisfies the provided testing function.</li>
+<li>filter() <br>
+Creates a new array with all of the elements of this array for which the provided filtering function returns true.</li>
+<li><p>find()</p></li>
+<li><p>findIndex()</p></li>
+<li>keys()</li>
+<li>map()</li>
+<li>reduce()</li>
+<li>reduceRight()</li>
+<li>values()</li>
+</ul>
+
+<h2 id="html">HTML</h2>
+
+<p>基本语法</p></div></body>
+</html>
