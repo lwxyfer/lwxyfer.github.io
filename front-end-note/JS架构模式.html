@@ -9,7 +9,7 @@
 h1 { border-left: 3px solid #4fc08d; }
 </style>
 </head>
-<body><div class="container"><h1 id="js架构">JS架构</h1>
+<body><div class="container"><h1 id="js架构模式">JS架构模式</h1>
 
 <p>本文讨论JS的架构模式</p>
 
@@ -21,27 +21,31 @@ h1 { border-left: 3px solid #4fc08d; }
 
 <p>另外讨论 前端组件化，模块化</p>
 
-<p>的清楚它们各自的区别。</p>
+<p>清楚它们各自的区别。</p>
+
+<blockquote>
+  <p>对于架构模式，设计模式，一个针对整体的蓝图就是偏向理论，设计模式是偏向小格局，技术方面的应用。对她们的详细比较只有从软件开发中来谈，相对来说，前端与软件开发是有差距的，一个是broswer 一个是系统底层 <br>
+  双向通信(MVP)，和双向绑定data-binding(MVVM） </p>
+</blockquote>
 
 <p>聊一聊前端架构。</p>
 
 <blockquote>
-  <h3 id="此文问题">此文问题：</h3>
-  
-  <p>1。 清楚JS模板，模板引擎 如：underscore里的_template 模板 <br>
-  2. 要先去了解一样东西，得先要看官网和官方文档。然后WIKI.然后google就可以了。</p>
+  <p><strong>TODO</strong>： <br>
+  1。 清楚JS模板，模板引擎 如：underscore里的_template 模板 <br>
+  2. 要先去了解一样东西，得先要看官网和官方文档。然后WIKI.然后google就可以了。 <br>
+  3. 业务逻辑 数据处理 ，业务逻辑倒是经常听到</p>
 </blockquote>
 
 <hr>
 
 <p><div class="toc">
 <ul>
-<li><a href="#js架构">JS架构</a><ul>
-<li><ul>
-<li><a href="#此文问题">此文问题：</a></li>
-</ul>
-</li>
-<li><a href="#mv-简介">MV* 简介</a></li>
+<li><a href="#js架构模式">JS架构模式</a><ul>
+<li><a href="#比较学习">比较学习</a></li>
+<li><a href="#mvc-简介">MVC 简介</a></li>
+<li><a href="#model-view-presenter">Model View Presenter</a></li>
+<li><a href="#model-view-viewmodel">Model View ViewModel</a></li>
 </ul>
 </li>
 </ul>
@@ -53,7 +57,55 @@ BACKBONE <br>
 Augular <br>
 Polymer</p>
 
-<h2 id="mv-简介">MV* 简介</h2>
 
-<p><a href="https://zh.wikipedia.org/wiki/MVC">https://zh.wikipedia.org/wiki/MVC</a></p></div></body>
+
+<h2 id="比较学习">比较学习</h2>
+
+<p><a href="http://blog.csdn.net/imlogic/article/details/993554">http://blog.csdn.net/imlogic/article/details/993554</a> 架构与设计模式</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html">http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html</a> 阮一峰写的简单的图示，这位大神怎么说呢，很多时候都是写的不是很深入，而且还TM有错。很会发展自己的影响力才是真的。评论才是本体啦。</p>
+
+<p><a href="http://www.andyfrench.info/2010/07/comparing-mvc-mvp-and-mvvm-patterns.html">http://www.andyfrench.info/2010/07/comparing-mvc-mvp-and-mvvm-patterns.html</a> 对MVC MVP MVVM 做了比较</p>
+
+<p><a href="http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm">http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm</a>  <br>
+<a href="http://stackoverflow.com/questions/2056/what-are-mvp-and-mvc-and-what-is-the-difference">http://stackoverflow.com/questions/2056/what-are-mvp-and-mvc-and-what-is-the-difference</a>  <br>
+STACK的精彩回答：主要应用于软件开发</p>
+
+<p><a href="https://segmentfault.com/a/1190000003871577#articleHeader0">https://segmentfault.com/a/1190000003871577#articleHeader0</a> 详细讲了三种模式，而且从应用层面分析了作用。</p>
+
+<p><a href="https://segmentfault.com/a/1190000000379723">https://segmentfault.com/a/1190000000379723</a> 对流行框架的分析与比较</p>
+
+<p>MVVM and Presentation Model(MVP) both derive from the model–view–controller pattern (MVC).</p>
+
+<h2 id="mvc-简介">MVC 简介</h2>
+
+<p><a href="https://zh.wikipedia.org/wiki/MVC">https://zh.wikipedia.org/wiki/MVC</a></p>
+
+<p>MVC模式（Model-View-Controller）是软件工程中的一种软件架构模式，把软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。又称：三种组件，模型 - 视图 - 控制器（MVC）。</p>
+
+<p>Controller层，它的职责为进行Model和View之间的协作（路由、输入预处理等）的应用逻辑（application logic）；Model进行处理业务逻辑。在一些网上的资料Controller和View之间的依赖关系可能不一样，有些是单向依赖，有些是双向依赖，这个其实关系不大，后面会看到它们的依赖关系都是为了把处理用户行为触发的事件处理权交给Controller。</p>
+
+<p><img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-19/87905241.jpg" alt="enter image description here" title=""> 软件开发中三个组件的典型应用。我说的是软件开发。尤其是视图上的区别：JS是对DOM的修改。</p>
+
+
+
+<h2 id="model-view-presenter">Model View Presenter</h2>
+
+<p><a href="https://zh.wikipedia.org/wiki/Model_View_Presenter">https://zh.wikipedia.org/wiki/Model_View_Presenter</a> <br>
+MVP <br>
+<img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-20/86412354.jpg" alt="enter image description here" title=""></p>
+
+
+
+<h2 id="model-view-viewmodel">Model View ViewModel</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel</a> <br>
+MVVM <br>
+<img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-20/74315266.jpg" alt="enter image description here" title=""></p>
+
+
+
+<h2 id="以上">以上</h2>
+
+<p>我在这里仅仅讨论的是几个模式的做法吧，更多的是一种思路，思想。毕竟属于软件开发体系嘛。然后对于实际应用来说，都有各自的做法，功能也是可扩展的，</p></div></body>
 </html>
