@@ -1,0 +1,418 @@
+# EVENT Reference
+
+此文总结JS的事件。
+
+[TOC]
+
+ MDN：
+>  DOM Events are sent to notify code of interesting things that have taken place. Each event is represented by an object which is based on the Event interface, and may have additional custom fields and/or functions used to get additional information about what happened. Events can represent everything from basic user interactions to automated notifications of things happening in the rendering model.
+
+红宝书:
+> JS 和 HTML 之间的交互式通过事件实现。事件，就是文档或浏览器窗口中发成的一些特定的交互瞬间。可以使用侦听器（或处理程序）来预定事件，一遍事件发生时执行相应的代码。这种在传统软件工程中被称为观察员模式的模型。支持页面的行为与页面的外观之间的松散耦合。
+
+https://developer.mozilla.org/en-US/docs/Web/Events
+上面列出了所有的事件(DOM drag XMLHttpRequest 等等)，事件太多，当然不可能都看啦。
+
+
+
+## Introduce
+
+Event 是对象，可以用new Event()来构建。它有属性和方法。分清事件和事件作用的对象。
+https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Creating_and_triggering_events 
+此例子演示创建事件，也通过此例子了解了事件的本质，和事件是如何作用。 分清楚事件作用的对象，事件过程，事件处理函数
+
+http://www.quirksmode.org/js/introevents.html
+大神之作
+
+## API
+
+1. Event :  https://developer.mozilla.org/en-US/docs/Web/API/Event 
+通过这里可以看到：事件的构造函数；事件的属性；事件的方法；那么平时的click这些其实是标准化的事件，通过上面的[链接](https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Creating_and_triggering_events)可以看到自定义事件是个什么过程。
+
+2. EventTarget ： https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+Element, document, and window are the most common event targets, but other objects can be event targets too, for example XMLHttpRequest, AudioNode, AudioContext, and others.
+
+W3school：http://www.w3school.com.cn/jsref/dom_obj_event.asp 简单的事件对象
+事件接口Event interface
+
+## Good parts
+
+说几个重要的方法：
+
+### 对于EventTarget
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+- EventTarget.addEventListener()
+Register an event handler of a specific event type on the EventTarget.
+- EventTarget.removeEventListener()
+Removes an event listener from the EventTarget.
+- EventTarget.dispatchEvent()
+Dispatch an event to this EventTarget.
+
+这个就是事件处理函数。
+
+
+### 对于：properties
+
+- Event.bubble
+A boolean indicating whether the event bubbles up through the DOM or not.阻止冒泡。
+- Event.cancelable
+
+属于重要的属性
+
+
+### Event Handler
+
+https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers
+http://www.takka.com.hk/jstutor/ch11/ch11.htm
+
+简单讲就是：事件加上on： 比如：onclick , onblur 就叫事件句柄。或者说是这么一种对事件的处理。
+
+> When discussing the various methods of listening to events,
+> 
+> - **event listener** refers to a function or object registered via EventTarget.addEventListener(),
+> - whereas **event handler** refers to a function registered via on... attributes or properties.
+
+### 事件流
+
+https://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture 
+
+![enter image description here](http://7xojf9.com1.z0.glb.clouddn.com/16-1-22/97578571.jpg)
+
+**标准的DOM事件流**
+所有的浏览器都支持；而最开始的事件捕获流由于支持性缘故，所以现在基本对事件处理都是在事件冒泡阶段。
+
+1. 事件捕获阶段 capture phase
+2. 处于目标阶段  target phase
+3. 事件冒泡阶段 bubbling phase
+
+###  事件监听
+
+**添加**：element.addEventListener(<event-name>, <callback>, <use-capture>);
+**移除**：element.removeEventListener(<event-name>, <callback>, <use-capture>);
+
+
+需要注意的是，绑定事件时的回调函数不能是匿名函数，必须是一个声明的函数，因为解除事件绑定时需要传递这个回调函数的引用，才可以断开绑定。例如：
+```
+var fun = function() {
+    // function logic
+};
+
+element.addEventListener('click', fun, false);
+element.removeEventListener('click', fun, false);
+```
+
+在使用 addEventListener 函数来监听事件时，第三个参数设置为 false，这样监听事件时只会监听冒泡阶段发生的事件。
+
+这是因为 IE 浏览器不支持在捕获阶段监听事件，为了统一而设置的，毕竟 IE 浏览器的份额是不可忽略的。
+
+### 事件冒泡与默认行为
+
+在DOM中默认情况下，事件是会冒泡的，即同样的事件会沿着DOM树逐级触发。 有时这是我们不希望的行为，可以在事件处理函数中阻止它。
+```
+// 事件处理函数的第一个参数是一个事件对象
+$('#foo').click(function(event){
+    event.stopPropagation(); 
+    // do sth.
+});
+```
+浏览器对用户事件的默认行为是另一个需要考虑的事情，尤其是<a>标签的click事件。 当用户点击<a>标签时，首先调用所有的事件处理函数，然后执行默认行为：页面跳转或者定位。 同样地，我们可以阻止它：
+```
+$('a').click(function(event){
+    event.preventDefault();
+    // do sth.
+});
+```
+在实践中，我们常常让事件处理函数return false来阻止冒泡和默认行为， 可以认为return false做了三件事情：
+stopPropagation()；
+preventDefault()；
+立即结束当前函数并返回。
+```
+$('a').click(function(event){
+    // do sth.
+    return false;
+});
+```
+
+### 事件对象
+
+from：http://yujiangshui.com/javascript-event/
+当一个事件被触发的时候，会创建一个事件对象（Event Object），这个对象里面包含了一些有用的属性或者方法。事件对象会作为第一个参数，传递给我们的毁掉函数。
+
+- type(string)
+事件的名称，比如 “click”。
+
+- target(node)
+事件要触发的目标节点。
+
+- bubbles (boolean)
+表明该事件是否是在冒泡阶段触发的。
+
+- preventDefault (function)
+这个方法可以禁止一切默认的行为，例如点击 a 标签时，会打开一个新页面，如果为 a 标签监听事件 click 同时调用该方法，则不会打开新页面。
+
+- stopPropagation (function)
+停止冒泡，上面有提到，不再赘述。
+
+- stopImmediatePropagation (function)
+与 stopPropagation 类似，就是阻止触发其他监听函数。但是与 stopPropagation 不同的是，它更加 “强力”，阻止除了目标之外的事件触发，甚至阻止针对同一个目标节点的相同事件，Demo：http://jsfiddle.net/yujiangshui/ju2ujmzp/2/。
+
+- cancelable (boolean)
+这个属性表明该事件是否可以通过调用 event.preventDefault 方法来禁用默认行为。
+
+- eventPhase (number)
+这个属性的数字表示当前事件触发在什么阶段。none：0；捕获：1；目标：2；冒泡：3。
+
+- pageX 和 pageY (number)
+这两个属性表示触发事件时，鼠标相对于页面的坐标。Demo：http://api.jquery.com/event.pagex/。
+
+- isTrusted (boolean)
+表明该事件是浏览器触发（用户真实操作触发），还是 JavaScript 代码触发的。
+
+### 事件回调函数作用域
+
+http://jsbin.com/sodaxa/3/edit?html,js,output  
+
+正如这个例子所示
+
+```
+<button id="element">Click Me</button>
+```
+```
+var element = document.getElementById('element');
+var user = {
+ firstname: 'Bob',
+ greeting: function(){
+   alert('My name is ' + this.firstname);
+ }
+};
+
+// Attach user.greeting as a callback
+element.addEventListener('click', user.greeting);  // My name is undefined
+
+
+// 加入匿名函数
+element.addEventListener('click', function() {
+  user.greeting();            // My name is Bob
+});  
+
+// 因为事件绑定函数时，该函数会以当前元素(被事件监听的对象）为作用域执行。
+```
+
+## Event Delegate
+
+这就是通常所说的事件代理，事件委托。因为事件有冒泡机制，所有子节点的事件都会顺着父级节点跑回去，所以我们可以通过监听父级节点来实现监听子节点的功能，这就是事件代理。
+
+通过事件流能够很清楚明白JS事件代理原理。
+
+```
+// 对于
+<ul id="list">
+  <li id="item1">item1</li>
+  <li id="item2">item2</li>
+  <li id="item3">item3</li>
+  <li id="item4">item4</li>
+</ul>
+
+// 普通做法
+window.onload=function(){
+  var ulNode=document.getElementById("list");
+  var liNodes=ulNode.childNodes||ulNode.children;
+  for(var i=0;i<liNodes.length;i++){
+    liNodes[i].addEventListener('click',function(e){
+      alert(e.target.innerHTML);
+    },false);
+  }
+}
+
+// 事件代理:松散耦合
+window.onload = function() {
+  var ulNode = document.getElementById("list");
+  ulNode.addEventListener('click',function(e){
+       if(e.target&&e.target.nodeName.toUpperCase()=="LI"){/*判断目标事件是否为li，过滤节点*/
+         alert(e.target.innerHTML);
+       }
+     },false);
+};
+
+// 扩展使用
+// Get the parent DIV, add click listener...
+document.getElementById("myDiv").addEventListener("click",function(e) {
+    // Get the CSS classes, e.target was the clicked element
+    var classes = e.target.className.split(" ");
+    if(classes) {
+        for(var x = 0; x < classes.length; x++) {
+            if(classes[x] == "classA") {   // 通过固定类来绑定
+                console.log("Target element clicked!");
+            }
+        }
+    }
+});
+
+// jQuery 更加 灵活，方便，简单
+$("div").delegate("button","click",function(){
+  $("p").slideToggle();
+});
+
+// jQuery其他代理方式:
+
+live()
+delegate()
+on()
+off()
+bind()
+
+```
+
+## jQuery
+
+http://www.css88.com/jqapi-1.9/on/
+http://www.ituring.com.cn/article/467 此文比较详细 , jQuery中多种事件绑定方式对比
+http://harttle.com/2015/06/26/jquery-event.html  多个方式比较以及重要的点
+
+
+jQuery提供了统一的事件绑定和触发机制：
+
+- 绑定事件：bind、on、live、delegate、keyup(<function>)；
+- 触发事件：trigger('keyup')、keyup()；
+- 解绑事件：unbind、off、die、undelegate。
+
+### 自定义事件
+
+jQuery事件是基于DOM事件的，但jQuery提供了更加普遍的事件机制。 这使得我们可以方便地自定义事件，只需要给一个尚不存在的事件名即可：
+```
+<div id='foo'></div>
+<script>
+$('#foo').bind('fucked', function(){
+    console.log("I'm fucked.");
+});
+$('#foo').trigger('fucked');
+</script>
+```
+
+### 事件绑定与事件委托区分
+
+```
+$('.ul1 a').on('click', function(){
+    alert('正在监听');
+});  // 事件绑定
+
+$('.ul2').on('click', 'a', function(){
+    alert('正在监听');
+});  //  事件委托
+```
+当动态创建新 DOM 结构的时候，第一个 ul 问题就出现了，新创建结构虽然还是 .ul1 > a，但是没有绑定事件，所以无法执行回调函数。而第二个 ul 工作的很好，因为点击新创建的 DOM ，它的事件会冒泡到父级节点进行处理。
+DEMO:  http://jsfiddle.net/lwxyfer/tntd0439/
+
+### ON
+
+on才是集大成者。通过源码可以看到其他方法都是通过`.on()`实现的
+
+```
+bind: function( types, data, fn ) {
+    return this.on( types, null, data, fn );
+},
+unbind: function( types, fn ) {
+    return this.off( types, null, fn );
+},
+
+live: function( types, data, fn ) {
+    jQuery( this.context ).on( types, this.selector, data, fn );
+    return this;
+},
+die: function( types, fn ) {
+    jQuery( this.context ).off( types, this.selector || "**", fn );
+    return this;
+},
+
+delegate: function( selector, types, data, fn ) {
+    return this.on( types, selector, data, fn );
+},
+undelegate: function( selector, types, fn ) {
+    return arguments.length === 1 ? this.off( selector, "**" ) : this.off( types, selector || "**", fn );
+},
+```
+
+----------
+
+
+翻译：http://www.ido321.com/1570.html 
+原文：http://modernweb.com/2014/11/25/javascript-interview-questions-event-delegation/
+  上文在处理事件中讲了`this`的指定
+
+
+ 
+代理 监听 捕获  绑定  解绑
+阻止冒泡 与阻止事件默认行为
+
+分清楚是谈论的事件委托 还是 绑定 。尤其是在讨论jQuery时
+ 
+ 事件绑定与事件委托区分在JQ中有点模糊
+
+完成原生JS 事件委托封装。
+如何阻止事件冒泡、阻止浏览器默认行为、解绑事件处理函数、自定义事件
+
+大神的文章：
+
+## IE兼容
+
+IE 中往回调函数中传递的事件对象与标准也有一些差异，你需要使用 window.event 来获取事件对象。所以你通常会写出下面代码来获取事件对象：
+`event = event || window.event`
+
+此外还有一些事件属性有差别，比如比较常用的 event.target 属性，IE 中没有，而是使用 event.srcElement 来代替。如果你的回调函数需要处理触发事件的节点:
+`node = event.srcElement || event.target;`
+
+
+### 事件封装，跨浏览器
+```
+// 跨浏览器事件，简单封装
+var EventUtil = {
+    addHandler: function(element,type,handler) {
+        if(element.addEventListener) {
+            element.addEventListener(type,handler,false);
+        }else if(element.attachEvent) {
+            element.attachEvent("on"+type,handler);
+        }else {
+            element["on" +type] = handler;
+        }
+    },  //  事件监听
+    removeHandler: function(element,type,handler){
+        if(element.removeEventListener) {
+            element.removeEventListener(type,handler,false);
+        }else if(element.detachEvent) {
+            element.detachEvent("on"+type,handler);
+        }else {
+            element["on" +type] = null;
+        }
+    },  // 接触监听
+    getEvent: function(event) {
+        return event ? event : window.event;
+    },  //  获取事件对象
+    getTarget: function(event) {
+        return event.target || event.srcElement;
+    },  // 属性
+    preventDefault: function(event){
+        if(event.preventDefault) {
+            event.preventDefault();
+        }else {
+            event.returnValue = false;
+        }
+    },   // 阻止默认行为，，注意 return false; 
+    stopPropagation: function(event) {
+        if(event.stopPropagation) {
+            event.stopPropagation();
+        }else {
+            event.cancelBubble = true;
+        }
+    }  //  阻止冒泡
+};
+```
+
+## REFERENCE
+http://stackoverflow.com/questions/1687296/what-is-dom-event-delegation  事件代理原理讲解，参考多个回答的链接
+http://yujiangshui.com/javascript-event/
+http://www.cnblogs.com/tugenhua0707/p/4501843.html  多个经典的demo，封装来自这
+http://javascript.info/tutorial/events       Tutorial
+https://github.com/cssmagic/blog/issues/48  步进学习
+http://stackoverflow.com/questions/1357118/event-preventdefault-vs-return-false?rq=1  关于： stopPropagation() 、 returnValue=false 、return false 三者关系，衡量在哪使用哪个。`return false` does `e.preventDefault()` and `e.stopPropagation()`.
