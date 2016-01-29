@@ -230,16 +230,6 @@ position: unset;
 </div>
 ```
 
-vartical-align :  具体的使用. 作用在父元素上还是子元素上?
-
-单独使用与和table-cell配合使用的不同，
-
-对于行内和块状元素的不同。
-
-行内： 对准基线，设置父元素高度后需要调整line-height用来调准基线。
-
-块状： 。。。。
-
 ### vertical-align
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
@@ -359,4 +349,4 @@ vertical-align: unset;
 
 # 水平垂直居中
 
-终上
+终上结合水平和垂直居中完成 水平和垂直上都居中。
