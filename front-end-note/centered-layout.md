@@ -4,10 +4,8 @@
 vertical centering
 layout
 
-不定宽：父容器，子元素 不定宽
-水平居中、垂直居中。
-容器宽度跟着内容走。
-主要针对块状元素block.
+本文主要解决在不定宽不定高的情况下完成水平居中和垂直居中。
+主要针对块级元素的居中.  我们这讨论的是 块状元素，所以就不用讨论多行，块状内随意啊（我这又犯傻啦）
 行内元素居中：分为单行和多行： 一般 text-align:center 水平居中 或者 height:2rem ; line-height: 2rem  垂直居中
 
 [TOC]
@@ -241,6 +239,91 @@ vartical-align :  具体的使用. 作用在父元素上还是子元素上?
 行内： 对准基线，设置父元素高度后需要调整line-height用来调准基线。
 
 块状： 。。。。
+
+### vertical-align
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+The vertical-align CSS property specifies the vertical alignment of an inline or table-cell box.
+
+指定行内元素和表格单元格的垂直对齐方式。就是有两种情况。
+
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements Block 元素
+h p li
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements Inline 元素 
+一个行内元素只占据它对应标签的边框所包含的空间
+img,button, input, label, select, textarea
+
+对于img：
+定义上是inline元素，但其表现可以说是inline-block。又被称为Replaced element
+https://www.w3.org/TR/CSS2/conform.html#replaced-element
+
+
+#### 下面讲一讲vertical-align:middle  设置垂直居中 
+要清楚的是：vertical-align:middle 只是设置对齐方式，而不是就直接应用就会垂直居中。
+
+- 单行inline ： 
+ 使用 vertical-align：middle; 如果父元素设置高度，需要设置line-height与元素本身高度一致（ 改变基线位置）。
+ 注意的是 span ,  img 属于 inline element 
+http://codepen.io/lwxyfer/pen/rxvOvM
+http://www.css4you.de/example/vertical-align.html
+
+- 多行inline：
+在设置了父容器高度的情况下，那么必须设置行高，那么多行的话，每一行都那么高，就非常高了，这就是问题。
+而内容撑起父容器的高度，如果不设置父容器的高度的话，既看不出是否居中了，这个垂直居中也就没有意义了。
+使用`br` 做多行居中就会产生问题。 所以对于inline只适合做单行居中。
+
+- block：table-cell
+那么更多是配合table-cell 做 `p 、div` 这种块级的垂直居中。
+那么这里的问题是： css 属性是放到父元素 还是子元素呢？ 区别在哪？ 
+
+```
+// first : parent
+.parent {
+	display:table-cell;
+	vertical-align:middle;
+}
+// second : child 
+.parent {
+	display:table;
+}
+.child {
+	display:table-cell;
+	vertical-align:middle;
+}
+// 在上面的代码中，两种方式都可以居中，但是有区别。
+我个人偏向于第一种：只用设置父元素，子元素随意块级、行内，br可用，都可居中。容器内为正常布局。
+对于第二种:父元素容器为table，每个child都是一个单元格。而其实第一种方法就是第二种的单元格。
+```
+
+value:
+```
+/* keyword values */
+vertical-align: baseline;
+vertical-align: sub;
+vertical-align: super;
+vertical-align: text-top;
+vertical-align: text-bottom;
+vertical-align: middle;
+vertical-align: top;
+vertical-align: bottom;
+
+/* <length> values */
+vertical-align: 10em;
+vertical-align: 4px;
+
+/* <percentage> values */
+vertical-align: 20%;
+
+/* Global values */
+vertical-align: inherit;
+vertical-align: initial;
+vertical-align: unset;
+```
+
+参考链接：
+- http://stackoverflow.com/questions/2939914/vertically-align-text-in-a-div  
+注意的是：其中答案使用 `pseudo ：before` 的情况。
+
 
 
 
