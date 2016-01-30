@@ -1,12 +1,13 @@
-# 即实现居中布局方案
+# 居中布局与扩展学习
 
 > horizontal centering
 vertical centering
 layout
 
-本文主要解决在不定宽不定高的情况下完成水平居中和垂直居中。
-主要针对块级元素的居中.  我们这讨论的是 块状元素，所以就不用讨论多行，块状内随意啊（我这又犯傻啦）
-行内元素居中：分为单行和多行： 一般 text-align:center 水平居中 或者 height:2rem ; line-height: 2rem  垂直居中
+本文主要解决在不定宽不定高的情况下完成`block element`水平居中和垂直居中。
+
+
+
 
 [TOC]
 
@@ -31,6 +32,8 @@ layout
 我们的需求： 块状元素居中  但 文字不布局。
 
 
+### inline-block 扩展
+
 **看来 `inline-block` 很多内容啊：**
 
 - http://ued.taobao.org/blog/2012/08/inline-block/  
@@ -50,11 +53,11 @@ hasLayout 解析  即IE下的布局hack方式
 - http://www.w3cplus.com/css/fighting-the-space-between-inline-block-elements
 inline-block造成的子元素之间的空白BUG解决。
 
-### Display  TODO
+### Display
 
 **display:**
 http://quirksmode.org/css/css2/display.html
-https://css-tricks.com/almanac/properties/d/display/  全部
+https://css-tricks.com/almanac/properties/d/display/  
 https://developer.mozilla.org/en-US/docs/Web/CSS/display
 > **所有属性值对比与分析**
 区分： 行内元素inline与块状元素block  使用dispaly的不同之处。
@@ -136,10 +139,6 @@ respect height and width
 
 child会根据内容自动伸缩。即不用设置child的宽度都可以用margin使其居中。方便简单，兼容性高。只用设置子元素。
 
-table:  实例化table的不同属性值。
-
-
-
 ## absolute & transform
 
 ```
@@ -156,13 +155,14 @@ table:  实例化table的不同属性值。
 </div>
 ```
 
-兼容性问题：我不需要满足IE10以下的浏览器，所以不管喽。 加入浏览器前缀即可，不过现代浏览器目前都支持标准写法。 
-脱离文档流：absolute 、 float  脱离文档流  
+兼容性问题：我不需要满足IE10以下的浏览器，所以不管喽。 加入浏览器私有前缀即可，不过通过我的测试，现代浏览器目前都支持标准写法。 
+CAN I USE  :  http://caniuse.com/#search=transform
+
 
 ### position
 
-https://developer.mozilla.org/en-US/docs/Web/CSS/position
-http://zh.learnlayout.com/position.html
+https://developer.mozilla.org/en-US/docs/Web/CSS/position MDN
+http://zh.learnlayout.com/position.html  布局
 
 ```
 /* Keyword values */
@@ -210,9 +210,7 @@ position: unset;
 	<div class="child">DEMO</div>
 </div>
 ```
-
 我的flex指南： http://blog.lwxyfer.com/573.html
-
 
 
 # 垂直居中
@@ -232,23 +230,25 @@ position: unset;
 
 ### vertical-align
 
-https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+> https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align MDN定义与介绍
 The vertical-align CSS property specifies the vertical alignment of an inline or table-cell box.
 
-指定行内元素和表格单元格的垂直对齐方式。就是有两种情况。
+基本概念：
 
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements Block 元素
-h p li
+h~ p li
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements Inline 元素 
 一个行内元素只占据它对应标签的边框所包含的空间
 img,button, input, label, select, textarea
 
-对于img：
+ - 对于img：
 定义上是inline元素，但其表现可以说是inline-block。又被称为Replaced element
 https://www.w3.org/TR/CSS2/conform.html#replaced-element
 
 
 #### 下面讲一讲vertical-align:middle  设置垂直居中 
+
+它指定行内元素和表格单元格的垂直对齐方式。那么就是有两种情况。
 要清楚的是：vertical-align:middle 只是设置对齐方式，而不是就直接应用就会垂直居中。
 
 - 单行inline ： 
@@ -260,7 +260,7 @@ http://www.css4you.de/example/vertical-align.html
 - 多行inline：
 在设置了父容器高度的情况下，那么必须设置行高，那么多行的话，每一行都那么高，就非常高了，这就是问题。
 而内容撑起父容器的高度，如果不设置父容器的高度的话，既看不出是否居中了，这个垂直居中也就没有意义了。
-使用`br` 做多行居中就会产生问题。 所以对于inline只适合做单行居中。
+使用`br` 做多行居中就会产生问题。 所以对于inline我认为只适合做单行居中。
 
 - block：table-cell
 那么更多是配合table-cell 做 `p 、div` 这种块级的垂直居中。
@@ -281,11 +281,11 @@ http://www.css4you.de/example/vertical-align.html
 	vertical-align:middle;
 }
 // 在上面的代码中，两种方式都可以居中，但是有区别。
-我个人偏向于第一种：只用设置父元素，子元素随意块级、行内，br可用，都可居中。容器内为正常布局。
-对于第二种:父元素容器为table，每个child都是一个单元格。而其实第一种方法就是第二种的单元格。
+//我个人偏向于第一种：只用设置父元素，子元素随意块级、行内，br可用，都可居中。容器内为正常布局。
+//对于第二种:父元素容器为table，每个child都是一个单元格。而其实第一种方法就是第二种的单元格。
 ```
 
-value:
+All values:
 ```
 /* keyword values */
 vertical-align: baseline;
@@ -319,6 +319,7 @@ vertical-align: unset;
 
 ## absolute & transform
 
+与水平居中一样。
 ```
 .parent {
 	position:relative;
@@ -335,6 +336,9 @@ vertical-align: unset;
 
 ## flex & align-items
 
+
+对于整体的布局，我更加喜欢使用flex，但确实是有兼容性问题。要兼顾 老式写法和混合写法。
+我的flex指南： http://blog.lwxyfer.com/573.html
 ```
 // 第一种
 .parent {
@@ -350,3 +354,10 @@ vertical-align: unset;
 # 水平垂直居中
 
 终上结合水平和垂直居中完成 水平和垂直上都居中。
+
+
+# 总结
+
+1. 文章引用的内容都标示了出处。用来保证文章内容正确性。
+2. 文章内容实例测试： http://jsbin.com/jofinu/10/edit?html,css,output
+3.  以上是个人总结。
