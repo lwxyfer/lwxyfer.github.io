@@ -31,7 +31,7 @@ week
 
 ## Range
 
-```
+```html
 <input type="range" max="100" min="0" value="10" step="1">
 ```
 
@@ -101,7 +101,7 @@ input[type=range]::-ms-track {
 ### the Thumb
 The widget that you click or drag along the track is called the thumb. It can be styled just like a regular HTML element.
 
-```
+```css
 /* Special styling for WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -147,7 +147,7 @@ A note on IE: Internet Explorer 10+ has a slightly different approach to range i
 
 Another thing to note is that you can apply focus effects to the track which change the styling when the user is interacting with the range.
 
-```
+```css
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8.4px;
