@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>javascript design patterns</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<style>
+h1 { border-left: 3px solid #4fc08d; }
+</style>
+</head>
+<body><div class="container"><h1 id="javascript-design-patterns">JavaScript design patterns</h1>
+
+<blockquote>
+  <p>此文通过书籍：《learn design pattern》详细解释关于JS的设计模式。也就是那十几种模式。然后再对MVC、MVVM等深入学习。那么就是读书笔记以及扩展啦。 <br>
+  TODO:</p>
+  
+  <ul>
+  <li>Achieve TODOmvc examples: <a href="http://todomvc.com/">http://todomvc.com/</a></li>
+  <li>Finish something that can prove I have learned this. Such a single web application . </li>
+  <li>learn to use such as Vue.js BACKBONE AUGULAR. Finish something that is useful</li>
+  <li>understand AMD &amp; CMD standard。</li>
+  <li>最后注意中英文翻译的差异</li>
+  <li>AMD CommonJS 规范 </li>
+  </ul>
+</blockquote>
+
+<p>第一次总结： <br>
+由于此文内容较多，算是 《learn design pattern》 这本书的简单学习吧。前面部分细读了，后面就晕了，就简单粗读了。 <br>
+此文关注点：</p>
+
+<ul>
+<li>类 概念、定义、模仿（simulate）</li>
+<li>对象 概念、创建、属性、方法 <br>
+<ul><li>设计模式针对的点： 在（软件开发）对象和类；那么在JS就是模拟类 </li></ul></li>
+<li>各种设计模式 <br>
+<ul><li>这是本文写作的目的，就是明白这几种设计模式，不过最终还是得实践才行。</li>
+<li>本文主要讨论这个点。其他另外做文。 </li></ul></li>
+<li>MV* 架构模式 <br>
+<ul><li>此文做简介，需详细深入</li>
+<li>MVC/MVP/MVVM 等 == 主流框架的学习和实践</li>
+<li>backbone &amp; Vue.js 彻底实践 </li>
+<li>组件？？？</li></ul></li>
+<li>模块化 <br>
+<ul><li>AMD</li>
+<li>CMD</li>
+<li>CommonJS</li>
+<li>ES6 Harmony    </li></ul></li>
+<li>JQuery插件 <br>
+<ul><li>插件的编写规范，模式 </li></ul></li>
+<li>命名变量空间 <br>
+<ul><li>正好解决了我想解决的问题和困惑 </li></ul></li>
+</ul>
+
+<p><div class="toc">
+<ul>
+<li><a href="#javascript-design-patterns">JavaScript design patterns</a><ul>
+<li><a href="#wtf-design-pattern">WTF design pattern?</a></li>
+<li><a href="#categories-of-design-pattern">Categories of design pattern</a><ul>
+<li><a href="#creational-design-patterns-创建型">Creational design patterns 创建型</a></li>
+<li><a href="#structural-design-patterns-结构">Structural design patterns 结构</a></li>
+<li><a href="#behavioral-design-patterns-行为">Behavioral design patterns 行为</a></li>
+<li><a href="#关于类class-说明">关于类：class 说明</a></li>
+<li><a href="#模式分类详细表格">模式分类详细表格</a><ul>
+<li><a href="#创建型">创建型</a></li>
+<li><a href="#结构型">结构型</a></li>
+<li><a href="#行为型">行为型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#javascript-设计模式-es5">JavaScript 设计模式 （ES5）</a><ul>
+<li><a href="#浅谈对象">浅谈对象</a></li>
+<li><a href="#constructor">Constructor</a></li>
+<li><a href="#module">Module</a></li>
+<li><a href="#reveal-module">reveal module</a></li>
+<li><a href="#singleton">singleton</a></li>
+<li><a href="#observer-publishsbuscribe-pattern">Observer &amp; Publish/Sbuscribe pattern</a></li>
+<li><a href="#mediator">Mediator</a></li>
+<li><a href="#prototype">Prototype</a></li>
+<li><a href="#command">Command</a></li>
+<li><a href="#facade">Facade</a></li>
+<li><a href="#factory">Factory</a></li>
+<li><a href="#mixin">Mixin</a></li>
+<li><a href="#decorator">Decorator</a></li>
+<li><a href="#flyweight">Flyweight</a></li>
+</ul>
+</li>
+<li><a href="#javascript-mv-架构模式">JavaScript MV* 架构模式</a></li>
+<li><a href="#模块化的javascript">模块化的JavaScript</a><ul>
+<li><a href="#scripts-loaders">Scripts Loaders</a></li>
+<li><a href="#amd-asynchronous-module-definition">AMD ：Asynchronous Module Definition</a></li>
+<li><a href="#cmd">CMD</a></li>
+<li><a href="#commonjs">CommonJS</a></li>
+</ul>
+</li>
+<li><a href="#jquery-中的设计模式">JQuery 中的设计模式</a></li>
+<li><a href="#jquery-插件的设计模式">JQuery 插件的设计模式</a></li>
+<li><a href="#命名空间模式">命名空间模式</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</p>
+
+<p>通过Design patterns，learn DP， 深入系列 来通解DP。 <br>
+我看到的东西不应是简单的语法知识，而是一种大处着眼的编程思想，解决方法，一个能够解决问题的方案。此文所讲的设计模式不即包括在JS开发涉及的设计模式，而且包括通常的软件开发。</p>
+
+
+
+<h2 id="wtf-design-pattern">WTF design pattern?</h2>
+
+<p>WIKI：<a href="https://en.wikipedia.org/wiki/Software_design_pattern">https://en.wikipedia.org/wiki/Software_design_pattern</a>（简介，历史，详细分类）</p>
+
+<p>设计模式是命名、抽象和识别对可重用的面向对象设计有用的的通用设计结构。设计模式确定类和他们的实体、他们的角色和协作、还有他们的责任分配。 <br>
+每一个设计模式都聚焦于一个面向对象的设计难题或问题。它描述了在其它设计的约束下它能否使用，使用它后的后果和得失。因为我们必须最终实现我们的设计模式，所以每个设计模式都提供了例子..代码来对实现进行阐释。 <br>
+虽然设计模式被描述为面向对象的设计，它们基于那些已经被主流面向对象语言实现过的解决方案..</p>
+
+<p>那么通俗的来讲：设计模式是一种意义上的解决方案，架构。可重用，并且切实解决问题，满足模式原型和三条规则。</p>
+
+
+
+<h2 id="categories-of-design-pattern">Categories of design pattern</h2>
+
+<p>三个分类</p>
+
+
+
+<h3 id="creational-design-patterns-创建型">Creational design patterns 创建型</h3>
+
+<p>创建型设计模式关注于对象创建的机制方法，通过该方法,对象以适应工作环境的方式被创建。基本的对象创建方法可能会给项目增加额外的复杂性，而这些模式的目的就是为了通过控制创建过程解决这个问题。</p>
+
+<ul>
+<li>constructor 构造器</li>
+<li>factory 工厂</li>
+<li>abstract factory 抽象工厂</li>
+<li>prototype 原型</li>
+<li>singleton 单例</li>
+<li>builder 建造者</li>
+</ul>
+
+
+
+<h3 id="structural-design-patterns-结构">Structural design patterns 结构</h3>
+
+<p>结构模式关注于对象组成和通常识别的方式实现不同对象之间的关系。该模式有助于在系统的某一部分发生改变的时候，整个系统结构不需要改变。该模式同样有助于对系统中某部分没有达到某一目的的部分进行重组。</p>
+
+<ul>
+<li>decorator 装饰者</li>
+<li>facade 外观</li>
+<li>flyweight 享元模式</li>
+<li>adapter 适配器模式</li>
+<li>proxy 代理</li>
+</ul>
+
+
+
+<h3 id="behavioral-design-patterns-行为">Behavioral design patterns 行为</h3>
+
+<p>行为模式关注改善或精简在系统中不同对象间通信。</p>
+
+<ul>
+<li>iterator 迭代</li>
+<li>mediator 中介者</li>
+<li>observer 观察者</li>
+<li>visitor 访问者</li>
+</ul>
+
+
+
+<h3 id="关于类class-说明">关于类：class 说明</h3>
+
+<p><a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">http://www.phpied.com/3-ways-to-define-a-javascript-class/</a> <br>
+<a href="https://zh.wikipedia.org/wiki/%E7%B1%BB_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)">https://zh.wikipedia.org/wiki/%E7%B1%BB_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)</a></p>
+
+<p>这里我要理解类的概念 <br>
+JavaScript是一种弱类型语言，不过类可以通过函数模拟出来。 最常见的实现这一点的方法，是先定义一个JavaScript函数，然后再使用这个新的关键字创建一个对象。可以通过这种方法像下面这样给类定义新的属性与方法。</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="com">// A car "class"</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Car</span><span class="pun">(</span><span class="pln"> model </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+  </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">model </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">color </span><span class="pun">=</span><span class="pln"> </span><span class="str">"silver"</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">year  </span><span class="pun">=</span><span class="pln"> </span><span class="str">"2012"</span><span class="pun">;</span><span class="pln">
+
+  </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">getInfo </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">model </span><span class="pun">+</span><span class="pln"> </span><span class="str">" "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">year</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">};</span><span class="pln">
+
+</span><span class="pun">}</span><span class="kwd">var</span><span class="pln"> myCar </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Car</span><span class="pun">(</span><span class="str">"ford"</span><span class="pun">);</span><span class="pln">
+
+myCar</span><span class="pun">.</span><span class="pln">year </span><span class="pun">=</span><span class="pln"> </span><span class="str">"2010"</span><span class="pun">;</span><span class="pln">
+
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> myCar</span><span class="pun">.</span><span class="pln">getInfo</span><span class="pun">()</span><span class="pln"> </span><span class="pun">);</span></code></pre>
+
+
+
+<h3 id="模式分类详细表格">模式分类详细表格</h3>
+
+<p>Keep in mind that there will be patterns in this table that reference the concept of ʺclassesʺ. JavaScript is a class‑less language, however classes can be simulated using functions.</p>
+
+
+
+<h4 id="创建型">创建型</h4>
+
+<p><img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-9/33077957.jp" alt="enter image description here" title=""></p>
+
+
+
+<h4 id="结构型">结构型</h4>
+
+<p><img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-9/88707293.jp" alt="enter image description here" title=""></p>
+
+
+
+<h4 id="行为型">行为型</h4>
+
+<p><img src="http://7xojf9.com1.z0.glb.clouddn.com/16-1-9/44576655.jp" alt="enter image description here" title=""></p>
+
+
+
+<h2 id="javascript-设计模式-es5">JavaScript 设计模式 （ES5）</h2>
+
+<p>我们要完成的每个脚本和Web应用都可能会有它自己的独特需求，我们需要思考模式对实现来说在哪些方面能够提供真正的价值。 <br>
+返回的是对象和类，那么下面我们将要注意的是：类 和 对象，并且区分。 </p>
+
+<ul>
+<li>熟悉<strong>Object</strong>的属性、方法</li>
+</ul>
+
+<p>术语：</p>
+
+<ul>
+<li>继承</li>
+<li>共享</li>
+<li>封装</li>
+<li>实例化  instantiation</li>
+<li>引用</li>
+<li>字面量</li>
+<li>命名空间</li>
+<li>重载</li>
+<li>耦合度</li>
+<li>代码复用</li>
+</ul>
+
+
+
+<h3 id="浅谈对象">浅谈对象</h3>
+
+<p>Object-oriented 语言有一个标志，就是都有类的概念，通过类可以创建任意多个具有相同属性和方法的对象。ECMAScript没有类的概念，与普通的就有区别。ES2015已经支持类了。</p>
+
+<p>那么类和对象的区别</p>
+
+<blockquote>
+  <p>ECMA-262把对象定义：“无序属性的集合，其属性可以包含基本值、对象、函数”。散列表的概念。</p>
+</blockquote>
+
+<p>MDN: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object</a> <br>
+CANIUSE: <a href="http://kangax.github.io/compat-table/es5/#test-Object.defineProperty">http://kangax.github.io/compat-table/es5/#test-Object.defineProperty</a> <br>
+上面详细介绍了属性 和 方法</p>
+
+<p><strong>创建对象的三种基本方式：</strong> <br>
+注意这三种创建方式的差别。 </p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> newObject </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+</span><span class="com">// or</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> newObject </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">create</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">null</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> newObject </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">create</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">);</span><span class="pln">
+</span><span class="com">// or</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> newObject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span></code></pre>
+
+<p>Object.create创建了一个拥有特定原型的对象,并且也包含选项式的特定属性.(例如,Object.create(prototype,optionalDescriptorObject))。观察下面例子中的区别。</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> myCar </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Ford Escort"</span><span class="pun">,</span><span class="pln">
+  drive</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Weeee. I'm driving!"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">},</span><span class="pln">
+  panic</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Wait. How do you stop this thing?"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="com">// Use Object.create to instantiate a new car</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> yourCar </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">create</span><span class="pun">(</span><span class="pln"> myCar </span><span class="pun">);</span><span class="pln">  </span><span class="com">// 这三种创建造成的不同，即 yourCar ===myCar真假的区分。</span><span class="pln">
+</span><span class="com">//var yourCar = new Object( myCar );</span><span class="pln">
+</span><span class="com">//var yourCar = myCar;</span><span class="pln">
+
+</span><span class="com">// let us differ these.</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar</span><span class="pun">.</span><span class="pln">name </span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar </span><span class="pun">===</span><span class="pln"> myCar</span><span class="pun">);</span><span class="pln"> </span><span class="com">//false true true </span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar </span><span class="pun">);</span><span class="com">// 这也有所不同，create() 显示是继承来的属性，而new和= 直接具有该属性。</span><span class="pln">
+yourCar</span><span class="pun">.</span><span class="pln">price </span><span class="pun">=</span><span class="lit">1000</span><span class="pun">;</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">yourCar</span><span class="pun">.</span><span class="pln">price</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">myCar</span><span class="pun">.</span><span class="pln">price</span><span class="pun">);</span></code></pre>
+
+<p><strong>设置对象属性（property）4个方法：</strong></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="com">// ECMAScript 3 兼容形式</span><span class="pln">
+</span><span class="com">// 1\. “点号”法</span><span class="pln">
+newObject</span><span class="pun">.</span><span class="pln">someKey </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Hello World"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> key </span><span class="pun">=</span><span class="pln"> newObject</span><span class="pun">.</span><span class="pln">someKey</span><span class="pun">;</span><span class="pln">
+</span><span class="com">// 2\. “方括号”法</span><span class="pln">
+newObject</span><span class="pun">[</span><span class="str">"someKey"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Hello World"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> key </span><span class="pun">=</span><span class="pln"> newObject</span><span class="pun">[</span><span class="str">"someKey"</span><span class="pun">];</span><span class="pln">
+
+</span><span class="com">// 3. Object.defineProperty</span><span class="pln">
+</span><span class="com">// Set properties</span><span class="pln">
+</span><span class="typ">Object</span><span class="pun">.</span><span class="pln">defineProperty</span><span class="pun">(</span><span class="pln"> newObject</span><span class="pun">,</span><span class="pln"> </span><span class="str">"someKey"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    value</span><span class="pun">:</span><span class="pln"> </span><span class="str">"for more control of the property's behavior"</span><span class="pun">,</span><span class="pln">
+    writable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+    enumerable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+    configurable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+
+</span><span class="com">// 4. Object.defineProperties</span><span class="pln">
+</span><span class="com">// 同时设置多个属性</span><span class="pln">
+</span><span class="typ">Object</span><span class="pun">.</span><span class="pln">defineProperties</span><span class="pun">(</span><span class="pln"> newObject</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"someKey"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    value</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Hello World"</span><span class="pun">,</span><span class="pln">
+    writable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pln">
+</span><span class="pun">},</span><span class="pln">
+    </span><span class="str">"anotherKey"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    value</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Foo bar"</span><span class="pun">,</span><span class="pln">
+    writable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>属性类型 与 特性：</strong> <br>
+ECMA-262定义了内部才能访问的特性（attribute),用来描述属性的各种特征。特性是内部值，放在两队方括号中，如：[[configurable]] <br>
+<strong>属性分为： 数据属性 和访问属性</strong></p>
+
+<ol>
+<li>数据属性 <br>
+数据属性包含一个数据值的位置，咋这个位置可以读取和写入值。有4个特性描述数据属性。</li>
+</ol>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="com">// 描述符（descriptor）</span><span class="pln">
+</span><span class="pun">[[</span><span class="typ">Configurable</span><span class="pun">]]</span><span class="pln">   </span><span class="com">// 默认 true   调用Object.defineProperty后 3个都为 false</span><span class="pln">
+</span><span class="pun">[[</span><span class="typ">Ennumberable</span><span class="pun">]]</span><span class="pln">   </span><span class="com">// 默认 true</span><span class="pln">
+</span><span class="pun">[[</span><span class="typ">Writable</span><span class="pun">]]</span><span class="pln">       </span><span class="com">// 默认 true</span><span class="pln">
+</span><span class="pun">[[</span><span class="typ">Value</span><span class="pun">]]</span><span class="pln">          </span><span class="com">// 默认 undefined</span><span class="pln">
+
+</span><span class="typ">Object</span><span class="pun">.</span><span class="pln">defineProperty</span><span class="pun">(</span><span class="pln"> newObject</span><span class="pun">,</span><span class="pln"> </span><span class="str">"someKey"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    value</span><span class="pun">:</span><span class="pln"> </span><span class="str">"for more control of the property's behavior"</span><span class="pun">,</span><span class="pln">
+    writable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+    enumerable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+    configurable</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln"> </span><span class="com">// 一旦configurable为 false 那么就不能改回 true；</span><span class="pln">
+    </span><span class="pun">});</span></code></pre>
+
+<ol>
+<li>访问器属性</li>
+</ol>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> book </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  _year </span><span class="pun">:</span><span class="pln"> </span><span class="lit">2004</span><span class="pun">,</span><span class="pln">   </span><span class="com">// 注意这里的下划线 ， 使用对象方法</span><span class="pln">
+  edition </span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="typ">Object</span><span class="pun">.</span><span class="pln">defineProperty</span><span class="pun">(</span><span class="pln">book</span><span class="pun">,</span><span class="pln"> </span><span class="str">"year"</span><span class="pun">,{</span><span class="pln">
+  </span><span class="kwd">get</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">_year</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">},</span><span class="pln">
+  </span><span class="kwd">set</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">newValue</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    this_year </span><span class="pun">=</span><span class="pln"> newValue</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">edition </span><span class="pun">+=</span><span class="pln"> newValue </span><span class="pun">-</span><span class="lit">2004</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">book</span><span class="pun">.</span><span class="pln">year</span><span class="pun">);</span><span class="pln">  </span><span class="com">//2004</span><span class="pln">
+book</span><span class="pun">.</span><span class="pln">year </span><span class="pun">=</span><span class="lit">2005</span><span class="pun">;</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">book</span><span class="pun">.</span><span class="pln">edition</span><span class="pun">);</span><span class="pln"> </span><span class="com">//2004</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">book</span><span class="pun">.</span><span class="pln">year</span><span class="pun">)</span><span class="pln"> </span><span class="com">//2</span></code></pre>
+
+<p><strong>对象方法下次再讲</strong>  <br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object</a></p>
+
+
+
+<h3 id="constructor">Constructor</h3>
+
+<p>构造器模式 / 构造函数模式 </p>
+
+<p>对象构造器是被用来创建特殊类型的对象的，首先它要准备使用的对象，其次在对象初次被创建时，通过接收参数，构造器要用来对成员的属性和方法进行赋值。</p>
+
+<p>基础构造器 ：this  <br>
+原型构造器 ：this + prototype </p>
+
+
+
+<h3 id="module">Module</h3>
+
+<p>模块是任何健壮的应用程序体系结构不可或缺的一部分，特点是有助于保持应用项目的代码单元既能清晰地分离又有组织。 <br>
+模块化模式用来进一步模拟类的概念，通过这样一种方式：我们可以在一个单一的对象中包含公共/私有的方法和变量，从而从全局范围中屏蔽特定的部分。 <br>
+模块模式使用闭包的方式来将”私有信息”,状态和组织结构封装起来。提供了一种将公有和私有方法，变量封装混合在一起的方式，这种方式防止内部信息泄露到全局中，从而避免了和其它开发者接口发生冲图的可能性。在这种模式下只有公有的API 会返回，其它将全部保留在闭包的私有空间中。</p>
+
+<p>在JavaScript中，实现模块有几个选项，他们包括：</p>
+
+<ul>
+<li>模块化模式 The Module pattern</li>
+<li>对象字面量表示 Object literal notation</li>
+<li>AMD模块 </li>
+<li>CommonJS 模块 </li>
+<li>ECMAScript Harmony 模块</li>
+</ul>
+
+<p><a href="http://rmurphey.com/blog/2009/10/15/using-objects-to-organize-your-code">http://rmurphey.com/blog/2009/10/15/using-objects-to-organize-your-code</a></p>
+
+<p>简单的讲：利用闭包实现公有和私有的区分， 理解封装的概念</p>
+
+<p>这里有个JQuery的导入混合模式，是需要注意的。 注意其他库的对模块模式的使用。</p>
+
+
+
+<h3 id="reveal-module">reveal module</h3>
+
+<p>缺点</p>
+
+<p>这个模式的一个缺点是如果私有函数需要使用公有函数，那么这个公有函数在需要打补丁的时候就不能被重载。因为私有函数仍然使用的是私有的实现，并且这个模式不能用于公有成员，只用于函数。</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> myRevealingModule </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+        </span><span class="kwd">var</span><span class="pln"> privateCounter </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+
+        </span><span class="kwd">function</span><span class="pln"> privateFunction</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            privateCounter</span><span class="pun">++;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="kwd">function</span><span class="pln"> publicFunction</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            publicIncrement</span><span class="pun">();</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="kwd">function</span><span class="pln"> publicIncrement</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            privateFunction</span><span class="pun">();</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="kwd">function</span><span class="pln"> publicGetCount</span><span class="pun">(){</span><span class="pln">
+          </span><span class="kwd">return</span><span class="pln"> privateCounter</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+
+        </span><span class="com">// Reveal public pointers to</span><span class="pln">
+        </span><span class="com">// private functions and properties       </span><span class="pln">
+
+       </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            start</span><span class="pun">:</span><span class="pln"> publicFunction</span><span class="pun">,</span><span class="pln">
+            increment</span><span class="pun">:</span><span class="pln"> publicIncrement</span><span class="pun">,</span><span class="pln">
+            count</span><span class="pun">:</span><span class="pln"> publicGetCount
+        </span><span class="pun">};</span><span class="pln">
+
+    </span><span class="pun">}();</span><span class="pln">
+
+myRevealingModule</span><span class="pun">.</span><span class="pln">start</span><span class="pun">();</span></code></pre>
+
+
+
+<h3 id="singleton">singleton</h3>
+
+<p>单例模式</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> </span><span class="typ">SingletonTester</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+  </span><span class="com">// options: an object containing configuration options for the singleton</span><span class="pln">
+  </span><span class="com">// e.g var options = { name: "test", pointX: 5};</span><span class="pln">
+  </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Singleton</span><span class="pun">(</span><span class="pln"> options </span><span class="pun">)</span><span class="pln">  </span><span class="pun">{</span><span class="pln">
+
+    </span><span class="com">// set options to the options supplied</span><span class="pln">
+    </span><span class="com">// or an empty object if none are provided</span><span class="pln">
+    options </span><span class="pun">=</span><span class="pln"> options </span><span class="pun">||</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+
+    </span><span class="com">// set some properties for our singleton</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">"SingletonTester"</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">pointX </span><span class="pun">=</span><span class="pln"> options</span><span class="pun">.</span><span class="pln">pointX </span><span class="pun">||</span><span class="pln"> </span><span class="lit">6</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">pointY </span><span class="pun">=</span><span class="pln"> options</span><span class="pun">.</span><span class="pln">pointY </span><span class="pun">||</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><span class="pln"> 
+  </span><span class="pun">}</span><span class="pln">
+
+  </span><span class="com">// our instance holder</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> instance</span><span class="pun">;</span><span class="pln">
+
+  </span><span class="com">// an emulation of static variables and methods</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> _static  </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  
+
+    name</span><span class="pun">:</span><span class="pln">  </span><span class="str">"SingletonTester"</span><span class="pun">,</span><span class="pln">
+
+    </span><span class="com">// Method for getting an instance. It returns</span><span class="pln">
+    </span><span class="com">// a singleton instance of a singleton object</span><span class="pln">
+    getInstance</span><span class="pun">:</span><span class="pln">  </span><span class="kwd">function</span><span class="pun">(</span><span class="pln"> options </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">instance</span><span class="pun">);</span><span class="pln">   
+      </span><span class="kwd">if</span><span class="pun">(</span><span class="pln"> instance  </span><span class="pun">===</span><span class="pln">  </span><span class="kwd">undefined</span><span class="pln"> </span><span class="pun">)</span><span class="pln">  </span><span class="pun">{</span><span class="pln">    </span><span class="com">// 这里也就是单例模式重要判断，检测instance</span><span class="pln">
+        instance </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Singleton</span><span class="pun">(</span><span class="pln"> options </span><span class="pun">);</span><span class="pln">   
+      </span><span class="pun">}</span><span class="pln">   
+      </span><span class="kwd">return</span><span class="pln">  instance</span><span class="pun">;</span><span class="pln"> 
+    </span><span class="pun">}</span><span class="pln"> 
+  </span><span class="pun">};</span><span class="pln"> 
+  </span><span class="kwd">return</span><span class="pln">  _static</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">})();</span><span class="pln">
+</span><span class="com">// 第一个实例</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> singletonTest  </span><span class="pun">=</span><span class="pln">  </span><span class="typ">SingletonTester</span><span class="pun">.</span><span class="pln">getInstance</span><span class="pun">({</span><span class="pln">
+  pointX</span><span class="pun">:</span><span class="pln">  </span><span class="lit">5</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> singletonTest</span><span class="pun">.</span><span class="pln">pointX </span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> singletonTest</span><span class="pun">.</span><span class="pln">instance</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 立即调用函数表达式，内部变量外部是无法访问的。</span><span class="pln">
+</span><span class="com">// 第二个实例</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> singletonTest1  </span><span class="pun">=</span><span class="pln">  </span><span class="typ">SingletonTester</span><span class="pun">.</span><span class="pln">getInstance</span><span class="pun">({</span><span class="pln">
+  pointX</span><span class="pun">:</span><span class="pln">  </span><span class="lit">6</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> singletonTest1</span><span class="pun">.</span><span class="pln">pointX </span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> singletonTest </span><span class="pun">===</span><span class="pln"> singletonTest1</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// console运行结果</span><span class="pln">
+ </span><span class="kwd">undefined</span><span class="pln">
+ </span><span class="lit">5</span><span class="pln">
+ </span><span class="kwd">undefined</span><span class="pln">
+ </span><span class="typ">Singleton</span><span class="pln"> </span><span class="pun">{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"SingletonTester"</span><span class="pun">,</span><span class="pln"> pointX</span><span class="pun">:</span><span class="pln"> </span><span class="lit">5</span><span class="pun">,</span><span class="pln"> pointY</span><span class="pun">:</span><span class="pln"> </span><span class="lit">10</span><span class="pun">}</span><span class="pln">
+ </span><span class="lit">5</span><span class="pln">
+ </span><span class="kwd">true</span></code></pre>
+
+<p>简单来看，对于两个创建的实例是完全相等的，对其的更改会同步出现在两个实例上。</p>
+
+<p>这是一篇介绍 单例模式的文章: 涉及其中的各种问题。单例模式的文章: <br>
+<a href="http://www.ibm.com/developerworks/webservices/library/co-single/index.html">http://www.ibm.com/developerworks/webservices/library/co-single/index.html</a></p>
+
+
+
+<h3 id="observer-publishsbuscribe-pattern">Observer &amp; Publish/Sbuscribe pattern</h3>
+
+<p>观察者模式</p>
+
+<p>在javascript时间里面，通常我们使用一种叫做发布/订阅模式的变体来实现观察者模式. <br>
+即： <strong>Publish/Sbuscribe pattern</strong></p>
+
+
+
+<h3 id="mediator">Mediator</h3>
+
+<p>中介者模式</p>
+
+
+
+<h3 id="prototype">Prototype</h3>
+
+<p>原型模式</p>
+
+<p>The GoF refer to the prototype pattern as one which creates objects based on a template of an existing object through cloning.</p>
+
+<p>关于原型的问题：learn design pattern 和 红宝书 不一样..总体感觉概念有出入，还得继续查资料细看这里。</p>
+
+<p>前者：继承  ，<strong>基于一个现有对象的模板创建对象</strong> <br>
+第一种方式：</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> myCar </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Ford Escort"</span><span class="pun">,</span><span class="pln">
+  drive</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Weeee. I'm driving!"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">},</span><span class="pln">
+  panic</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Wait. How do you stop this thing?"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="com">// Use Object.create to instantiate a new car</span><span class="pln">
+</span><span class="com">//var yourCar = Object.create( myCar );</span><span class="pln">
+</span><span class="com">//var yourCar =  myCar;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> yourCar </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">(</span><span class="pln"> myCar </span><span class="pun">);</span><span class="pln"> </span><span class="com">// 这里的创建方式不同，结果也不同。</span><span class="pln">
+
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar</span><span class="pun">.</span><span class="pln">name </span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar </span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> myCar</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yourCar </span><span class="pun">===</span><span class="pln"> myCar</span><span class="pun">);</span><span class="pln"> </span><span class="com">//由创建方式来看结果</span><span class="pln">
+yourCar</span><span class="pun">.</span><span class="pln">price </span><span class="pun">=</span><span class="lit">1000</span><span class="pun">;</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">yourCar</span><span class="pun">.</span><span class="pln">price</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">myCar</span><span class="pun">.</span><span class="pln">price</span><span class="pun">);</span></code></pre>
+
+<p>第二种实现方式：</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> beget </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">function</span><span class="pln"> F</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln"> proto </span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        F</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> proto</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> F</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">};</span><span class="pln">
+</span><span class="pun">})();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> xx </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+ </span><span class="kwd">get</span><span class="pun">:</span><span class="str">"right"</span><span class="pun">,</span><span class="pln">
+ </span><span class="kwd">out</span><span class="pun">:</span><span class="str">" false"</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> yy </span><span class="pun">=</span><span class="pln"> beget</span><span class="pun">(</span><span class="pln">xx</span><span class="pun">);</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> zz </span><span class="pun">=</span><span class="pln"> beget</span><span class="pun">(</span><span class="pln">xx</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> yy</span><span class="pun">===</span><span class="pln">zz</span><span class="pun">);</span><span class="pln">  </span><span class="com">// false 这里是false</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">yy</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">yy</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">)</span></code></pre>
+
+<p>后者(红宝书)</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="com">// 第一种：</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+</span><span class="typ">Person</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  constructor</span><span class="pun">:</span><span class="typ">Person</span><span class="pun">,</span><span class="pln">
+  name</span><span class="pun">:</span><span class="str">"test"</span><span class="pun">,</span><span class="pln">
+  age </span><span class="pun">:</span><span class="lit">10</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p1 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> p1</span><span class="pun">===</span><span class="pln">p2</span><span class="pun">);</span><span class="pln">  </span><span class="com">// false </span><span class="pln">
+</span><span class="com">// 第二种：</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+</span><span class="typ">Person</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  constructor</span><span class="pun">:</span><span class="typ">Person</span><span class="pun">,</span><span class="pln">
+  name</span><span class="pun">:</span><span class="str">"test"</span><span class="pun">,</span><span class="pln">
+  age </span><span class="pun">:</span><span class="lit">10</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p1 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+p1</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="lit">30</span><span class="pun">;</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">p1</span><span class="pun">.</span><span class="pln">name </span><span class="pun">===</span><span class="pln">p2</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> p2</span><span class="pun">.</span><span class="pln">name </span><span class="pun">);</span><span class="pln"> </span><span class="com">// test  </span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> p1</span><span class="pun">===</span><span class="pln">p2</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><span class="pln">
+</span><span class="com">// 第三种：对于引用类型的值</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+</span><span class="typ">Person</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  constructor</span><span class="pun">:</span><span class="typ">Person</span><span class="pun">,</span><span class="pln">
+  name</span><span class="pun">:</span><span class="str">"test"</span><span class="pun">,</span><span class="pln">
+  age </span><span class="pun">:</span><span class="lit">10</span><span class="pun">,</span><span class="pln">
+  array</span><span class="pun">:[</span><span class="lit">1</span><span class="pun">,</span><span class="lit">2</span><span class="pun">,</span><span class="lit">3</span><span class="pun">,</span><span class="lit">4</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p1 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> p2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><span class="pln">
+p1</span><span class="pun">.</span><span class="pln">array</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="lit">30</span><span class="pun">);</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">p1</span><span class="pun">.</span><span class="pln">array </span><span class="pun">===</span><span class="pln">p2</span><span class="pun">.</span><span class="pln">array</span><span class="pun">);</span><span class="pln"> </span><span class="com">// true 这里是true了，</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> p2</span><span class="pun">.</span><span class="pln">array </span><span class="pun">)</span><span class="pln"> </span><span class="com">// [1,2,3,4,30]</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> p1</span><span class="pun">===</span><span class="pln">p2</span><span class="pun">);</span><span class="pln"> </span><span class="com">//false</span></code></pre>
+
+<p>对于上面的情况来说：就第二种和第三种， 要区分 基本值、函数 与 其他引用类型如数组，通过console可以看出不同。</p>
+
+<blockquote>
+  <p><strong>基本类型 引用类型的区分</strong>，简单讲要看下数据类型</p>
+</blockquote>
+
+
+
+<h3 id="command">Command</h3>
+
+<p>命令模式</p>
+
+<p>模式旨在将函数的调用、请求和操作封装成一个单一的对象，然后对这个对象进行一系列的处理。</p>
+
+
+
+<h3 id="facade">Facade</h3>
+
+<p>外观模式：又称门面模式</p>
+
+<p>隐藏内在的复杂性，提高一个舒适的对外接口</p>
+
+
+
+<h3 id="factory">Factory</h3>
+
+<p>工厂模式</p>
+
+
+
+<h3 id="mixin">Mixin</h3>
+
+<p>混合模式</p>
+
+
+
+<h3 id="decorator">Decorator</h3>
+
+<p>装饰模式</p>
+
+
+
+<h3 id="flyweight">Flyweight</h3>
+
+<p>享元模式</p>
+
+<p>享元模式是一个优化重复、缓慢和低效数据共享代码的经典结构化解决方案。它的目标是以相关对象尽可能多的共享数据，来减少应用程序中内存的使用(例如：应用程序的配置、状态等)。</p>
+
+
+
+<h2 id="javascript-mv-架构模式">JavaScript MV* 架构模式</h2>
+
+<p>架构模式</p>
+
+<ul>
+<li>MVC  (Model(模型)-View(视图)-Controller(控制器)) </li>
+<li>MVP  (Model(模型)-View(视图)-Presenter) </li>
+<li>MVVM (Model(模型)-View(视图)-ViewModel(视图模型))。</li>
+</ul>
+
+<p>好吧，通过简单的阅读，发现并不能学的什么。还是必须得实际写代码，必须写一遍。 <br>
+决定使用VUE.JS BACKBONE都写点东西。</p>
+
+
+
+<h2 id="模块化的javascript">模块化的JavaScript</h2>
+
+<p>模板规范：先想一想，为什么模块很重要？ <br>
+因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。 <br>
+但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！</p>
+
+<ul>
+<li>AMD</li>
+<li>CMD</li>
+<li>CommonJS</li>
+<li>ES Harmony ES6版本</li>
+</ul>
+
+<p><a href="https://www.zhihu.com/question/20351507">https://www.zhihu.com/question/20351507</a></p>
+
+
+
+<h3 id="scripts-loaders">Scripts Loaders</h3>
+
+<p>脚本加载器</p>
+
+<p>RequireJS 、 curl.js。</p>
+
+<p>RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node. Using a modular script loader like RequireJS will improve the speed and quality of your code.</p>
+
+<p>这里我也必须学习我最长看到的<strong>Require.js</strong></p>
+
+
+
+<h3 id="amd-asynchronous-module-definition">AMD ：Asynchronous Module Definition</h3>
+
+<p>A Format For Writing Modular JavaScript In The Browser</p>
+
+
+
+<h3 id="cmd">CMD</h3>
+
+
+
+<h3 id="commonjs">CommonJS</h3>
+
+<hr>
+
+
+
+<h2 id="jquery-中的设计模式">JQuery 中的设计模式</h2>
+
+<p>从JQuery的源码分析，源码中所用的设计模式 </p>
+
+
+
+<h2 id="jquery-插件的设计模式">JQuery 插件的设计模式</h2>
+
+<p>涉及简单的JQuery插件开发</p>
+
+
+
+<h2 id="命名空间模式">命名空间模式</h2>
+
+<p>几乎所有重要的 Javascript 程序中都会用到命名空间。除非我们只是编写简单的代码，否则尽力确保正确地实现命名空间是很有必要的。这也能避免自己的代码收到第三方代码的污染。本小节将阐述以下设计模式：</p>
+
+<ul>
+<li>单一全局变量</li>
+<li>对象序列化的表示</li>
+<li>内嵌的命名空间</li>
+<li>即时调用的函数表达式</li>
+<li>命名空间注入</li>
+</ul></div></body>
+</html>

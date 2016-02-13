@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 6th Edition JS</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<style>
+h1 { border-left: 3px solid #4fc08d; }
+</style>
+</head>
+<body><div class="container"><h1 id="es6">ES6</h1>
+
+<p>标签： javascript</p>
+
+<hr>
+
+<p>话不多说，ES6开搞。  ES7也在日程上了。</p>
+
+<p>Bable转换器： ES6 =&gt; ES5 <a href="https://babeljs.io/">https://babeljs.io/</a> 不用担心浏览器的支持率</p>
+
+<blockquote>
+  <p>ECMAScript 6 compatibility table <br>
+  <a href="https://kangax.github.io/compat-table/es6/">https://kangax.github.io/compat-table/es6/</a> <br>
+  ECMAScript 6: New Features: Overview and Comparison <br>
+  <a href="http://es6-features.org/#Constants">http://es6-features.org/#Constants</a> <br>
+  ES6开发 - Google 搜索 <br>
+  <a href="https://www.google.co.jp/search?biw=1920&amp;bih=911&amp;q=ES6%E5%BC%80%E5%8F%91&amp;oq=ES6%E5%BC%80%E5%8F%91&amp;gs_l=serp.3..0l10.6844.8449.0.8657.4.4.0.0.0.0.250.484.2-2.2.0....0...1c.1j4.64.serp..2.2.483.HGRsooM9548">https://www.google.co.jp/search?biw=1920&amp;bih=911&amp;q=ES6%E5%BC%80%E5%8F%91&amp;oq=ES6%E5%BC%80%E5%8F%91&amp;gs_l=serp.3..0l10.6844.8449.0.8657.4.4.0.0.0.0.250.484.2-2.2.0….0…1c.1j4.64.serp..2.2.483.HGRsooM9548</a> <br>
+  函数的扩展 - ECMAScript 6入门 <br>
+  <a href="http://es6.ruanyifeng.com/#docs/function">http://es6.ruanyifeng.com/#docs/function</a> <br>
+  （二）：迭代器和for-of循环 - [ 深入浅出ES6 ] <br>
+  <a href="http://www.kancloud.cn/kancloud/es6-in-depth/45514">http://www.kancloud.cn/kancloud/es6-in-depth/45514</a> <br>
+  JS Bin - Collaborative JavaScript Debugging <br>
+  <a href="http://jsbin.com/sacufegofo/edit?html,js,console,output">http://jsbin.com/sacufegofo/edit?html,js,console,output</a> <br>
+  给 JavaScript 初心者的 ES2015 实战 <br>
+  <a href="http://gank.io/post/564151c1f1df1210001c9161">http://gank.io/post/564151c1f1df1210001c9161</a> <br>
+  使用ES6进行开发的思考 | EFE Tech <br>
+  <a href="http://efe.baidu.com/blog/es6-develop-overview/">http://efe.baidu.com/blog/es6-develop-overview/</a> <br>
+  ES6 In Depth Articles ★ Mozilla Hacks – the Web developer blog <br>
+  <a href="https://hacks.mozilla.org/category/es6-in-depth/">https://hacks.mozilla.org/category/es6-in-depth/</a> <br>
+  lukehoban/es6features <br>
+  <a href="https://github.com/lukehoban/es6features">https://github.com/lukehoban/es6features</a> <br>
+  StrongLoop | An Introduction To JavaScript ES6 Classes <br>
+  <a href="https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/">https://strongloop.com/strongblog/an-introduction-to-javascript-es6-classes/</a> <br>
+  透过ES6看JS未来 <br>
+  <a href="http://johnhax.net/2014/es6-js-future/">http://johnhax.net/2014/es6-js-future/</a> <br>
+  (1)ES6 的模块系统 - Jury Xiong’s Blog - SegmentFault <br>
+  <a href="http://segmentfault.com/a/1190000003410285?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io">http://segmentfault.com/a/1190000003410285?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a> <br>
+  ES6学习笔记 - 腾讯Web前端 IMWeb 团队社区 | blog | 团队博客 <br>
+  <a href="http://imweb.io/topic/5548995d9615e51472f38ac6">http://imweb.io/topic/5548995d9615e51472f38ac6</a> <br>
+  (1)搜索 ES6 - SegmentFault</p>
+</blockquote>
+
+<p><div class="toc">
+<ul>
+<li><a href="#es6">ES6</a><ul>
+<li><a href="#基本语法">基本语法</a></li>
+<li><a href="#let">let</a><ul>
+<li><a href="#块级作用域">块级作用域</a></li>
+<li><a href="#const">const</a></li>
+<li><a href="#跨模块常量">跨模块常量</a></li>
+<li><a href="#全局对象的属性">全局对象的属性</a></li>
+</ul>
+</li>
+<li><a href="#变量的解构赋值">变量的解构赋值</a></li>
+<li><a href="#字符串的扩展">字符串的扩展</a></li>
+<li><a href="#数值的扩展">数值的扩展</a></li>
+<li><a href="#数组的扩展">数组的扩展</a></li>
+<li><a href="#函数的扩展">函数的扩展</a></li>
+<li><a href="#对象的扩展">对象的扩展</a></li>
+<li><a href="#symbol">symbol</a></li>
+<li><a href="#proxy">proxy</a></li>
+<li><a href="#reflect">Reflect</a></li>
+<li><a href="#二进制数组">二进制数组</a></li>
+<li><a href="#set-weakset-map-weakmap-数据结构">Set WeakSet Map WeakMap  数据结构</a></li>
+<li><a href="#iterator和forof循环">Iterator和for…of循环</a></li>
+<li><a href="#generator函数">generator函数</a></li>
+<li><a href="#promise">promise</a></li>
+<li><a href="#关键点">关键点</a></li>
+<li><a href="#class">Class</a></li>
+<li><a href="#decorator">Decorator</a></li>
+<li><a href="#module">Module</a></li>
+</ul>
+</li>
+<li><a href="#todo">TODO:</a></li>
+</ul>
+</div>
+</p>
+
+
+
+<h2 id="基本语法">基本语法</h2>
+
+
+
+<h2 id="let">let</h2>
+
+<p>块状作用域 <br>
+不存在变量提升 <br>
+暂时性死区 temporal dead zone <br>
+不允许重复声明，直接报错</p>
+
+
+
+<h3 id="块级作用域">块级作用域</h3>
+
+<p>这块的注意，因为将于ES5的作用域有较大不同。</p>
+
+<p>如果在严格模式下，函数只能在顶层作用域和函数内声明，其他情况（比如if代码块、循环代码块）的声明都会报错。尽量想严格模式靠拢。</p>
+
+
+
+<h3 id="const">const</h3>
+
+<p>声明常量。这个也算有了。</p>
+
+
+
+<h3 id="跨模块常量">跨模块常量</h3>
+
+
+
+<h3 id="全局对象的属性">全局对象的属性</h3>
+
+
+
+<h2 id="变量的解构赋值">变量的解构赋值</h2>
+
+<p>ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</p>
+
+<ul>
+<li>数组的结构赋值</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> </span><span class="pun">[</span><span class="pln">a</span><span class="pun">,</span><span class="pln"> b</span><span class="pun">,</span><span class="pln"> c</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">];</span></code></pre>
+
+<ul>
+<li>对象的结构赋值</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> foo</span><span class="pun">,</span><span class="pln"> bar </span><span class="pun">}</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> foo</span><span class="pun">:</span><span class="pln"> </span><span class="str">"aaa"</span><span class="pun">,</span><span class="pln"> bar</span><span class="pun">:</span><span class="pln"> </span><span class="str">"bbb"</span><span class="pln"> </span><span class="pun">};</span><span class="pln">
+foo </span><span class="com">// "aaa"</span><span class="pln">
+bar </span><span class="com">// "bbb"</span></code></pre>
+
+<p>对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象 <br>
+的属性没有次序，变量必须与属性同名，才能取到正确的值。</p>
+
+<ul>
+<li>字符串的结构赋值</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">const</span><span class="pln"> </span><span class="pun">[</span><span class="pln">a</span><span class="pun">,</span><span class="pln"> b</span><span class="pun">,</span><span class="pln"> c</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> e</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">'hello'</span><span class="pun">;</span><span class="pln">
+a </span><span class="com">// "h"</span><span class="pln">
+b </span><span class="com">// "e"</span><span class="pln">
+c </span><span class="com">// "l"</span><span class="pln">
+d </span><span class="com">// "l"</span><span class="pln">
+e </span><span class="com">// "o"</span></code></pre>
+
+<ul>
+<li>函数的结构赋值</li>
+</ul>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">function</span><span class="pln"> add</span><span class="pun">([</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">]){</span><span class="pln">
+</span><span class="kwd">return</span><span class="pln"> x </span><span class="pun">+</span><span class="pln"> y</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> a
+dd</span><span class="pun">([</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">])</span><span class="pln"> </span><span class="com">// 3</span></code></pre>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="com">// 也可以使用默认值</span><span class="pln">
+</span><span class="kwd">function</span><span class="pln"> move</span><span class="pun">({</span><span class="pln">x </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">}</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{})</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="kwd">return</span><span class="pln"> </span><span class="pun">[</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">];</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> m
+ove</span><span class="pun">({</span><span class="pln">x</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">:</span><span class="pln"> </span><span class="lit">8</span><span class="pun">});</span><span class="pln"> </span><span class="com">// [3, 8]</span><span class="pln">
+move</span><span class="pun">({</span><span class="pln">x</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pun">});</span><span class="pln"> </span><span class="com">// [3, 0]</span><span class="pln">
+move</span><span class="pun">({});</span><span class="pln"> </span><span class="com">// [0, 0]</span><span class="pln">
+move</span><span class="pun">();</span><span class="pln"> </span><span class="com">// [0, 0]</span></code></pre>
+
+<ul>
+<li>圆括号问题 <br>
+解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，一个式子到底是模式，还是表达式，没 <br>
+有办法从一开始就知道，必须解析到（或解析不到）等号才能知道。</li>
+</ul>
+
+
+
+<h2 id="字符串的扩展">字符串的扩展</h2>
+
+<p>六中方法来表示字符</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="str">'\z'</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">'z'</span><span class="pln">  </span><span class="com">// true</span><span class="pln">
+</span><span class="str">'\172'</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">'z'</span><span class="pln"> </span><span class="com">// true</span><span class="pln">
+</span><span class="str">'\x7A'</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">'z'</span><span class="pln"> </span><span class="com">// true</span><span class="pln">
+</span><span class="str">'\u007A'</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">'z'</span><span class="pln"> </span><span class="com">// true</span><span class="pln">
+</span><span class="str">'\u{7A}'</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">'z'</span><span class="pln"> </span><span class="com">// true</span></code></pre>
+
+
+
+<h2 id="数值的扩展">数值的扩展</h2>
+
+<p>二进制和八进制表示法 <br>
+Number.isFinite(), Number.isNaN() <br>
+Number.parseInt(), Number.parseFloat() <br>
+Number.isInteger() <br>
+Number.EPSILON <br>
+安全整数和Number.isSafeInteger() <br>
+Math对象的扩展 <br>
+指数运算符</p>
+
+
+
+<h2 id="数组的扩展">数组的扩展</h2>
+
+<p>Array.from() <br>
+Array.of() <br>
+数组实例的copyWithin() <br>
+数组实例的find()和findIndex() <br>
+数组实例的fill() <br>
+数组实例的entries()，keys()和values() <br>
+数组实例的includes() <br>
+数组的空位 <br>
+数组推导</p>
+
+
+
+<h2 id="函数的扩展">函数的扩展</h2>
+
+<p>函数参数的默认值 <br>
+rest参数 <br>
+扩展运算符 <br>
+name属性 <br>
+箭头函数 <br>
+函数绑定 <br>
+尾调用优化 <br>
+函数参数的尾逗号</p>
+
+
+
+<h2 id="对象的扩展">对象的扩展</h2>
+
+<p>属性的简洁表示法 <br>
+属性名表达式 <br>
+方法的name属性 <br>
+Object.is() <br>
+Object.assign() <br>
+属性的可枚举性 <br>
+属性的遍历 <br>
+<strong>proto</strong>属性，Object.setPrototypeOf()，Object.getPrototypeOf() <br>
+对象的扩展运算符</p>
+
+
+
+<h2 id="symbol">symbol</h2>
+
+<p>ES6引入了一种新的原始数据类型Symbol，表示独一无二的值。它是JavaScript语言的第七种数据类型，前六种是：Undefined、Null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。 <br>
+- 概述 <br>
+- 作为属性名的Symbol <br>
+- 实例：消除魔术字符串 <br>
+- 属性名的遍历 <br>
+- Symbol.for()，Symbol.keyFor() <br>
+- 内置的Symbol值</p>
+
+
+
+<h2 id="proxy">proxy</h2>
+
+<p>Proxy用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。</p>
+
+<p>Proxy可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
+
+
+
+<h2 id="reflect">Reflect</h2>
+
+<p>Reflect对象与Proxy对象一样，也是ES6为了操作对象而提供的新API。</p>
+
+
+
+<h2 id="二进制数组">二进制数组</h2>
+
+<ul>
+<li>ArrayBuffer对象</li>
+<li>TypedArray视图</li>
+<li>复合视图</li>
+<li>DataView视图</li>
+<li>二进制数组的应用</li>
+</ul>
+
+<p>二进制数组（ArrayBuffer对象、TypedArray视图和DataView视图）是JavaScript操作二进制数据的一个接口。这些对象早就存在，属于独立的规格（2011年2月发布），ES6将它们纳入了ECMAScript规格，并且增加了新的方法。</p>
+
+<p>这个接口的原始设计目的，与WebGL项目有关。所谓WebGL，就是指浏览器与显卡之间的通信接口，为了满足JavaScript与显卡之间大量的、实时的数据交换，它们之间的数据通信必须是二进制的，而不能是传统的文本格式。文本格式传递一个32位整数，两端的JavaScript脚本与显卡都要进行格式转化，将非常耗时。这时要是存在一种机制，可以像C语言那样，直接操作字节，将4个字节的32位整数，以二进制形式原封不动地送入显卡，脚本的性能就会大幅提升。</p>
+
+<p>二进制数组就是在这种背景下诞生的。它很像C语言的数组，允许开发者以数组下标的形式，直接操作内存，大大增强了JavaScript处理二进制数据的能力，使得开发者有可能通过JavaScript与操作系统的原生接口进行二进制通信。</p>
+
+
+
+<h2 id="set-weakset-map-weakmap-数据结构">Set WeakSet Map WeakMap  数据结构</h2>
+
+<p>对应各自的属性和方法。</p>
+
+
+
+<h2 id="iterator和forof循环">Iterator和for…of循环</h2>
+
+<ul>
+<li>Iterator（遍历器）的概念</li>
+<li>数据结构的默认Iterator接口</li>
+<li>调用Iterator接口的场合</li>
+<li>字符串的Iterator接口</li>
+<li>Iterator接口与Generator函数</li>
+<li>遍历器对象的return()，throw()</li>
+<li>for…of循环</li>
+</ul>
+
+<p>JavaScript原有的表示“集合”的数据结构，主要是数组（Array）和对象（Object），ES6又添加了Map和Set。这样就有了四种数据集合，用户还可以组合使用它们，定义自己的数据结构，比如数组的成员是Map，Map的成员是对象。这样就需要一种统一的接口机制，来处理所有不同的数据结构。</p>
+
+<p>遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署Iterator接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）。</p>
+
+<p>Iterator的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是ES6创造了一种新的遍历命令for…of循环，Iterator接口主要供for…of消费。</p>
+
+
+
+<h2 id="generator函数">generator函数</h2>
+
+<p>Generator函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同。 <br>
+Generator函数有多种理解角度。从语法上，首先可以把它理解成，Generator函数是一个状态机，封装了多个内部状态。</p>
+
+<p>执行Generator函数会返回一个遍历器对象，也就是说，Generator函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历Generator函数内部的每一个状态。</p>
+
+<p>形式上，Generator函数是一个普通函数，但是有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体内部使用yield语句，定义不同的内部状态（yield语句在英语里的意思就是“产出”）。</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code><span class="kwd">function</span><span class="pun">*</span><span class="pln"> helloWorldGenerator</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">yield</span><span class="pln"> </span><span class="str">'hello'</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">yield</span><span class="pln"> </span><span class="str">'world'</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">return</span><span class="pln"> </span><span class="str">'ending'</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> hw </span><span class="pun">=</span><span class="pln"> helloWorldGenerator</span><span class="pun">();</span></code></pre>
+
+<ul>
+<li>next方法的参数</li>
+<li>for…of循环</li>
+<li>Generator.prototype.throw()</li>
+<li>Generator.prototype.return()</li>
+<li>yield*语句</li>
+<li>作为对象属性的Generator函数</li>
+<li>Generator函数的this</li>
+<li>Generator函数推导</li>
+<li>含义</li>
+<li>应用</li>
+</ul>
+
+
+
+<h2 id="promise">promise</h2>
+
+<p>所谓Promise，就是一个对象，用来传递异步操作的消息。它代表了某个未来才会知道结果的事件（通常是一个异步操作），并且这个事件提供统一的API，可供进一步处理。</p>
+
+<p>Promise对象有以下两个特点。</p>
+
+<p>（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称Fulfilled）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</p>
+
+<p>（2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从Pending变为Resolved和从Pending变为Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</p>
+
+<p>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</p>
+
+<p>Promise也有一些缺点。首先，无法取消Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。第三，当处于Pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</p>
+
+<ul>
+<li>Promise的含义 </li>
+<li>基本用法 </li>
+<li>Promise.prototype.then() </li>
+<li>Promise.prototype.catch()</li>
+<li>Promise.all() </li>
+<li>Promise.race() </li>
+<li>Promise.resolve() </li>
+<li>Promise.reject()</li>
+<li>两个有用的附加方法 </li>
+<li>应用 </li>
+<li>async函数</li>
+</ul>
+
+
+
+<h2 id="关键点">关键点</h2>
+
+<ul>
+<li>异步操作和Async函数</li>
+<li>Generator函数</li>
+<li>Thunk函数</li>
+<li>co模块</li>
+<li>async函数</li>
+</ul>
+
+<p>ES6诞生以前，异步编程的方法，大概有下面四种。</p>
+
+<ul>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>发布/订阅</li>
+<li>Promise 对象</li>
+</ul>
+
+
+
+<h2 id="class">Class</h2>
+
+<p>Class基本语法 <br>
+Class的继承 <br>
+原生构造函数的继承 <br>
+Class的取值函数（getter）和存值函数（setter） <br>
+Class的Generator方法 <br>
+Class的静态方法 <br>
+Class的静态属性 <br>
+new.target属性 <br>
+Mixin模式的实现</p>
+
+
+
+<h2 id="decorator">Decorator</h2>
+
+<p>修饰器（Decorator）是一个表达式，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持。</p>
+
+
+
+<h2 id="module">Module</h2>
+
+
+
+<h1 id="todo">TODO:</h1>
+
+<p>已经在文章头了。</p>
+
+<p>先把JS的模式搞的清清楚楚再来把ES6好生琢磨！！</p></div></body>
+</html>
