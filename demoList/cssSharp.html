@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.radius {
+			width:100px;
+			height:100px;
+			background:#00FF00;
+			border-radius: 50%;
+		}
+		.radius1 {
+			display:inline-block;
+			width:100px;
+			height:100px;
+			padding:10px;
+			background:#00BFFF;
+			border-radius: 10% 20% 20% 30%;
+		}
+		.radius2 {
+			display:inline-block;
+			width:200px;
+			height:200px;
+			padding:10px;
+			background:#FF69B4;
+			border-top-left-radius: 10% 20%;
+  			border-bottom-right-radius: 40% 20%;
+  			border-top-right-radius: 20% 50%;
+  			border-bottom-left-radius: 70% 10%;
+		}
+		.triangle {
+		  height: 0;
+		  width: 0;
+		  border-left: 100px solid red;
+		  border-right: 100px solid transparent;
+		  border-bottom: 100px solid transparent;
+		  border-top: 100px solid transparent;
+		}
+		.trapezium {
+			width:100px;
+			height:0;
+			border-bottom: 200px solid red;
+			border-bottom-image: -webkit-linear-gradient(red 0%,yellow 100%);
+			border-left:100px solid transparent;
+			border-right: 100px solid transparent;
+		}
+		.demo {
+			width:200px;
+            height: 200px;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 100px;
+            background: -webkit-linear-gradient( right, #fff 0%, #fff 100%), -webkit-linear-gradient( right, #00BFFF 0%, #00FF00 100% );
+            background-clip: content-box, padding-box;
+        }
+        .demo:hover {
+        	transition:3s;
+        	transform:rotate(360deg);
+        }
+		.demo1 {
+		    border-width: 15px;
+		    height:250px;
+		    border-style: solid;
+		    -moz-border-image:
+		      -webkit-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -moz-border-image:
+		      -o-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -moz-border-image:
+		      linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -webkit-border-image:
+		      -webkit-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -webkit-border-image:
+		      -o-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -webkit-border-image:
+		      linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -o-border-image:
+		      -webkit-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -o-border-image:
+		      -o-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    -o-border-image:
+		      linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		    border-image:
+		      linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+		}
+	</style>
+</head>
+<body>
+一个是获取属性值
+一个是获取元素的所有css
+
+TODO:
+几种方法获取和设置css
+
+看来要总结下  border 了： border-radius border-color  border-image   以及在 background-image size color clip   CSS multiple backgrounds 这个有趣  首先是这几个属性
+然后渐变确实很好多需要扩展的地方，
+
+
+
+	<h1>border-radius</h1>
+	<div class="radius rad"></div>
+	<input class="rad" type="range" max="100" min="0" value="50"></input>
+	<span class="rad">50%</span>
+	<textarea class="rad"></textarea>
+	<h1>border-radius more</h1>
+	<div class="radius1">不同大小radius</div>
+	<div class="radius2">border-top-left-radius: 10% 20%;</div>
+	<h1>border</h1>
+	<div class="triangle"></div>
+	<h1>trapezium</h1>
+	<div class="trapezium"></div>
+	<h1>渐变圆环: 值得学习的例子</h1>
+	<div class="demo"></div>
+	<h1>渐变border</h1>
+	<div class="demo1">dfafasfas</div>
+
+
+
+	<script>
+		function $(node) {
+			return document.querySelectorAll(node)
+		}
+		function getStyle(el, styleProp) {
+			var x = document.getElementById(el);
+			if (x.currentStyle)
+				var y = x.currentStyle[styleProp];
+			else if (window.getComputedStyle)
+				var y = document.defaultView.getComputedStyle(x, null).getPropertyValue(styleProp);
+			return y;
+		}
+		var radius = $('.rad')
+		radius[1].addEventListener('mouseup',function() {
+			radius[0].style.borderRadius = this.value + "%"
+			radius[2].innerHTML = this.value + "%"
+			radius[3].value = document.defaultView.getComputedStyle(radius[0], null).getPropertyValue();
+		})
+	</script>
+</body>
+</html>
