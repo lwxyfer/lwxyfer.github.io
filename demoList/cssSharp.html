@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>css sharp</title>
+	<meta author="lwxyfer.com">
+	<meta type="content" description="本文总结border所有属性，开发常见几何形状">
 	<style>
 		.radius {
 			width:100px;
@@ -83,6 +85,14 @@
 		    border-image:
 		      linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
 		}
+		.border-image {
+			width:200px;
+			height:200px;
+			background:skyblue;
+			border-width: 25px 30px 10px 20px;
+			border-radius:100px;
+  			border-image: -webkit-linear-gradient(gold 0%, rgba(0, 0, 0, 0) 100%)  25% 30% 10% 20% ;
+		}
 	</style>
 </head>
 <body>
@@ -112,7 +122,9 @@ TODO:
 	<h1>渐变圆环: 值得学习的例子</h1>
 	<div class="demo"></div>
 	<h1>渐变border</h1>
-	<div class="demo1">dfafasfas</div>
+	<div class="demo1">渐变与border</div>
+	<h1>border-image : 与 gradient配合</h1>
+	<div class="border-image"></div>
 
 
 
