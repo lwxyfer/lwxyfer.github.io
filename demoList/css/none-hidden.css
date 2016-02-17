@@ -1,0 +1,16 @@
+#none {
+    display:none;
+    background-image: url("http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-213927.jpg");
+}
+#hidden {
+    background-image: url("http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-28147.jpg");
+    visibility:hidden;
+}
+/*img {*/
+    /*display:none;*/
+    /*visibilitty:hidden;*/
+/*}*/
+
+#noselector {
+    background:url("http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-91022.jpg");
+}

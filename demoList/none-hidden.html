@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对图片加载问题的实际检验</title>
+    <link rel="stylesheet" href="css/none-hidden.css">
+</head>
+<body>
+解决图片是否加载的问题。
+
+
+<h1>display:none</h1>
+<p>display 不会占用空间 </p>
+<p>经检验: <br> 对于 firefox  display:none下的 img标签会加载图片，而 使用 background 不会加载图片</p>
+<div id="none">none
+    <img src="http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-206439.jpg" alt="">
+</div>
+<h1>visibility:none</h1>
+<p> visibility 会占用 空间 </p>
+<p>visibility:hidden 下的 img标签会加载图片，而 使用 background 也会加载图片</p>
+<div id="hidden">
+    <img src="http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-189414.jpg" alt="">
+</div>
+
+<h1> css 选择器匹配不到的元素： 不会加载图片 </h1>
+<h1>总的来说： 在chrome opera 下 两种情况都会不管怎样都会去加载图片； 在firefox 下情况就会不同。 </h1>
+</body>
+</html>
