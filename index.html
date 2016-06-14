@@ -14,14 +14,14 @@
 </head>
 
 <body class="grey lighten-3">
-    <header>
+    <header class="navbar-fixed">
         <nav class="red lighten-1 row z-depth-1">
             <a href="#" data-activates="slide-out" class="button-collapse left show-on-large"><i class="mdi-navigation-menu"></i></a>
-            <h1 class="col m2" style="line-height:64px">NavX</h1>
-            <div class="container col s10 m4 l6 right" id="searchBox">
+            <h3 class="col m2 l1 white-text tooltipped" data-position="right" data-delay="50" data-tooltip="配置自己的导航" style="line-height:64px">NavX</h3>
+            <div class="container col s10 m4 l4 right white z-depth-1" id="searchBox">
                 <form action="https://www.google.com/search" method="get">
                     <div class="input-field">
-                        <input id="search" type="search" name="q" required value="" placeholder="Ctrl + Enter" style="height:64px">
+                        <input id="search" type="search" name="q" required value="" placeholder="Ctrl + Enter" style="height:44px;margin:0px">
                         <label for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
@@ -87,6 +87,14 @@
                 </div>
                 <ul class="collection">
                     <a v-for="lists in navs" href="{{ lists.link }}" data-tooltip="{{ lists.tooltip }}"> {{ lists.text }} </a>
+                </ul>
+            </div>
+            <div class="col s12 m4">
+                <div class="border-2 left-align">
+                    <h4>正则</h4>
+                </div>
+                <ul class="collection">
+                    <a v-for="lists in regexp" href="{{ lists.link }}" data-tooltip="{{ lists.tooltip }}"> {{ lists.text }} </a>
                 </ul>
             </div>
         </div>
